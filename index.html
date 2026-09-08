@@ -589,11 +589,22 @@
     if (/base64/i.test(header)) { try { return new TextDecoder('utf-8').decode(Uint8Array.from(atob(body.replace(/\s+/g, '')), function(c){ return c.charCodeAt(0); })); } catch (e) { return null; } }
     return body.trim();
   }
+  function splitMimeParts(raw){
+    // Collect every boundary declared anywhere in the message (top-level and nested,
+    // e.g. multipart/mixed containing multipart/alternative) and split on all of them
+    // at once — this flattens nested multipart structures into flat leaf parts without
+    // needing a real recursive parser.
+    var boundaries = [], re = /boundary="?([^"\r\n;]+)"?/gi, m;
+    while ((m = re.exec(raw))) { if (boundaries.indexOf(m[1]) === -1) boundaries.push(m[1]); }
+    if (!boundaries.length) return null;
+    var escaped = boundaries.map(function(b){ return b.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); });
+    var splitRe = new RegExp('--(?:' + escaped.join('|') + ')(?:--)?\\r?\\n?');
+    return raw.split(splitRe);
+  }
   function extractEmailText(raw){
-    var bm = raw.match(/boundary="?([^"\r\n;]+)"?/i);
+    var parts = splitMimeParts(raw);
     // No multipart structure at all — likely already a simple message; bound it defensively.
-    if (!bm) return raw.slice(0, 8000);
-    var parts = raw.split('--' + bm[1]);
+    if (!parts) return raw.slice(0, 8000);
     for (var i = 0; i < parts.length; i++) {
       if (/Content-Type:\s*text\/plain/i.test(parts[i]) && !/Content-Disposition:\s*attachment/i.test(parts[i])) {
         var body = decodePart(parts[i]);
@@ -613,16 +624,16 @@
 
   var MAX_ATTACHMENTS_CLIENT = 8;
   function extractAttachments(raw){
-    var bm = raw.match(/boundary="?([^"\r\n;]+)"?/i);
-    if (!bm) return [];
-    var parts = raw.split('--' + bm[1]);
+    var parts = splitMimeParts(raw);
+    if (!parts) return [];
     var out = [];
     for (var i = 0; i < parts.length && out.length < MAX_ATTACHMENTS_CLIENT; i++) {
       var part = parts[i];
       if (!/Content-Disposition:\s*attachment/i.test(part)) continue;
       var headerEnd = part.search(/\r?\n\r?\n/);
       if (headerEnd === -1) continue;
-      var header = part.slice(0, headerEnd);
+      // Unfold RFC 5322 header continuation lines (long filenames wrap onto an indented next line).
+      var header = part.slice(0, headerEnd).replace(/\r?\n[ \t]+/g, ' ');
       if (!/Content-Transfer-Encoding:\s*base64/i.test(header)) continue; // only handle base64 attachments
       var typeMatch = header.match(/Content-Type:\s*([^;\r\n]+)/i);
       var nameMatch = header.match(/filename="?([^"\r\n;]+)"?/i);
