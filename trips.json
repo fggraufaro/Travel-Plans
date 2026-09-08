@@ -75,49 +75,25 @@
           "details": "Combina directamente con el vuelo de easyJet de arriba. 1 combinación en Birmingham New Street (te quedás en el mismo tren en University). Tarifa dividida — en su mayoría reembolsable/modificable, el tramo final de CrossCountry no es reembolsable. Total £24,60."
         },
         {
-          "id": "i_3e39a84776",
+          "id": "i_sncb511",
           "type": "train",
-          "title": "Brugge → Bruxelles Midi",
+          "title": "SNCB 511",
           "from": "Brugge",
           "to": "Bruxelles Midi",
-          "start": "2026-09-07T00:00",
-          "end": "",
+          "start": "2026-09-22T11:58",
+          "end": "2026-09-22T12:53",
           "provider": "TrainPal",
-          "confirmation": "",
+          "confirmation": "1134747839953051",
           "address": "",
-          "travelers": [],
-          "details": "El correo confirma una reserva de tren de TrainPal entre Brugge y Bruxelles Midi, pero no incluye más detalles como hora, precio o número de confirmación en el texto disponible.",
-          "attachments": []
-        },
-        {
-          "id": "i_3f4da14eb2",
-          "type": "train",
-          "title": "Brugge → Bruxelles Midi",
-          "from": "Brugge",
-          "to": "Bruxelles Midi",
-          "start": "2026-09-07T00:00",
-          "end": "",
-          "provider": "TrainPal",
-          "confirmation": "",
-          "address": "",
-          "travelers": [],
-          "details": "Confirmación de reserva de tren de TrainPal para el trayecto Brugge → Bruxelles Midi; el correo no incluye más detalles como horario, precio o número de confirmación.",
-          "attachments": []
-        },
-        {
-          "id": "i_c9d7b0ab30",
-          "type": "train",
-          "title": "Brugge → Bruxelles Midi",
-          "from": "Brugge",
-          "to": "Bruxelles Midi",
-          "start": "2026-09-07T00:00",
-          "end": "",
-          "provider": "TrainPal",
-          "confirmation": "",
-          "address": "",
-          "travelers": [],
-          "details": "Confirmación de reserva de tren de TrainPal para el trayecto Brugge → Bruxelles Midi; el correo no incluye más detalles visibles sobre horario, tarifa o precio.",
-          "attachments": []
+          "travelers": [
+            "Viviana Zimmermann",
+            "Pablo Guardati"
+          ],
+          "details": "Sentate en cualquier asiento disponible. Tarifa Flex Adult (BE: Anytime), 2da clase, reembolsable y no intercambiable. Total £38,95.",
+          "attachments": [
+            { "name": "E-receipt.pdf", "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747839953051/1788883438-E-receipt.pdf" },
+            { "name": "Viviana_Brugge_to_Bruxelles Midi_22_Sep_1158.pdf", "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747839953051/1788883438-Viviana_Brugge_to_Bruxelles_Midi_22_Sep_1158.pdf" }
+          ]
         }
       ]
     }

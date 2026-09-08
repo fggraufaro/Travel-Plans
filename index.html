@@ -652,7 +652,9 @@
     var reader = new FileReader();
     reader.onload = function(e){
       var raw = String(e.target.result || '');
-      var looksLikeMime = /^Content-Type:|^MIME-Version:|boundary=/im.test(raw.slice(0, 2000));
+      // Scan the whole file, not just a prefix — real emails (Gmail exports especially) can carry
+      // several KB of Received/ARC-Seal/DKIM-Signature relay headers before Content-Type/boundary appear.
+      var looksLikeMime = /\.eml$/i.test(file.name || '') || /^Content-Type:|^MIME-Version:|boundary=/im.test(raw);
       addPasteText = looksLikeMime ? extractEmailText(raw) : raw;
       addAttachments = looksLikeMime ? extractAttachments(raw) : [];
       if (!addPasteText.trim()) {
@@ -683,7 +685,7 @@
           var res = await fetch(url);
           if (!res.ok) throw new Error('fetch failed');
           var text = await res.text();
-          var looksLikeMime = /^Content-Type:|^MIME-Version:|boundary=/im.test(text.slice(0, 2000));
+          var looksLikeMime = /^Content-Type:|^MIME-Version:|boundary=/im.test(text);
           addPasteText = looksLikeMime ? extractEmailText(text) : text;
           addAttachments = looksLikeMime ? extractAttachments(text) : [];
           render();
