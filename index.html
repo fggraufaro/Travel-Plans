@@ -141,22 +141,25 @@
   .cal-nav-btn.prev svg{ transform:rotate(90deg); }
   .cal-nav-btn.next svg{ transform:rotate(-90deg); }
   .cal-range{ font-family:"Fraunces", Georgia, serif; font-weight:600; font-size:1.1rem; color:var(--ink); text-transform:capitalize; }
-  .cal-grid{ display:grid; grid-template-columns:repeat(7,1fr); gap:4px; margin-bottom:4px; }
-  .cal-wd{ text-align:center; font-size:.7rem; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.04em; padding-bottom:4px; }
-  .cal-cell{ aspect-ratio:1; border:1px solid var(--line); border-radius:8px; background:var(--surface); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; font-family:"IBM Plex Mono"; font-size:.85rem; color:var(--ink); padding:2px; cursor:pointer; }
-  .cal-cell.out{ opacity:.35; }
-  .cal-cell.today{ border-color:var(--coral); border-width:2px; }
-  .cal-cell.staying{ background:color-mix(in srgb, var(--teal) 16%, var(--surface)); }
-  .cal-cell.has-items{ font-weight:600; }
-  .cal-cell:hover{ border-color:var(--ink-faint); }
-  .cal-cell.selected{ outline:2px solid var(--ink); outline-offset:1px; }
-  .cal-dots{ display:flex; gap:2px; }
-  .cal-dot{ width:5px; height:5px; border-radius:50%; background:var(--ink-faint); }
-  .cal-dot.flight, .cal-dot.activity{ background:var(--coral); }
-  .cal-dot.train{ background:var(--sky); }
-  .cal-dot.car{ background:var(--accent-strong); }
-  .cal-dot.hotel{ background:var(--teal); }
-  .cal-dot.note{ background:var(--ink-soft); }
+  .cal-agenda{ display:flex; flex-direction:column; gap:7px; }
+  .cal-row{ display:flex; align-items:flex-start; gap:12px; width:100%; text-align:left; padding:10px 13px; border:1px solid var(--line); border-radius:12px; background:var(--surface); cursor:pointer; font-family:"IBM Plex Sans"; }
+  .cal-row.out{ opacity:.4; }
+  .cal-row.today{ border-color:var(--coral); border-width:2px; }
+  .cal-row.staying{ background:color-mix(in srgb, var(--teal) 10%, var(--surface)); }
+  .cal-row:hover{ border-color:var(--ink-faint); }
+  .cal-row.selected{ outline:2px solid var(--ink); outline-offset:1px; }
+  .cal-row-date{ flex:none; width:44px; display:flex; flex-direction:column; align-items:center; }
+  .cal-row-wd{ font-size:.68rem; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-faint); }
+  .cal-row-num{ font-family:"IBM Plex Mono"; font-size:1.15rem; font-weight:600; color:var(--ink); }
+  .cal-row.today .cal-row-num{ color:var(--coral); }
+  .cal-row-body{ flex:1; display:flex; flex-direction:column; gap:5px; min-width:0; padding-top:2px; }
+  .cal-row-empty{ font-size:.85rem; color:var(--ink-faint); }
+  .cal-label{ font-size:.85rem; padding:4px 9px; border-radius:7px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; background:color-mix(in srgb, var(--ink-faint) 14%, transparent); color:var(--ink-soft); }
+  .cal-label.flight, .cal-label.activity{ background:color-mix(in srgb, var(--coral) 16%, transparent); color:var(--coral); }
+  .cal-label.train{ background:color-mix(in srgb, var(--sky) 18%, transparent); color:var(--sky); }
+  .cal-label.car{ background:color-mix(in srgb, var(--accent-strong) 20%, transparent); color:var(--accent-strong); }
+  .cal-label.hotel{ background:color-mix(in srgb, var(--teal) 16%, transparent); color:var(--teal); }
+  .cal-expand{ padding:2px 0 6px; }
   .cal-empty-note{ color:var(--ink-faint); font-size:.92rem; padding:10px 0 4px; }
   .quick-add-btn{ display:flex; align-items:center; justify-content:center; gap:7px; width:100%; margin-top:10px; padding:12px; border:1.5px dashed var(--line-strong); border-radius:14px; background:transparent; color:var(--ink-soft); font-family:"IBM Plex Sans"; font-size:.9rem; font-weight:500; cursor:pointer; }
   .quick-add-btn svg{ width:16px; height:16px; }
@@ -433,24 +436,29 @@
     return s1 + ' – ' + s2;
   }
 
-  function buildDayInfo(items){
+  function dayLabels(items){
     var info = {};
+    function ensure(key){ if (!info[key]) info[key] = { labels: [], staying: false }; return info[key]; }
     items.forEach(function(item){
       if (item.type === 'hotel' && item.start && item.end) {
         var s = parseLocal(item.start), e = parseLocal(item.end);
         var cursor = new Date(s.getFullYear(), s.getMonth(), s.getDate());
         var endDay = new Date(e.getFullYear(), e.getMonth(), e.getDate());
+        var first = true;
         while (cursor < endDay) {
           var key = ymd(cursor);
-          if (!info[key]) info[key] = { dots: [], staying: false };
-          info[key].staying = true;
+          var d = ensure(key);
+          d.staying = true;
+          if (first) { d.labels.push({ type: 'hotel', text: item.title }); first = false; }
           cursor.setDate(cursor.getDate() + 1);
         }
       } else {
         var key2 = (item.start || '').slice(0, 10);
         if (!key2) return;
-        if (!info[key2]) info[key2] = { dots: [], staying: false };
-        info[key2].dots.push(item.type);
+        var text = item.type === 'activity'
+          ? (fmtTime(item.start) ? fmtTime(item.start) + ' ' + item.title : item.title)
+          : fmtTime(item.start) + ' ' + (item.from || '') + '→' + (item.to || '');
+        ensure(key2).labels.push({ type: item.type, text: text });
       }
     });
     return info;
@@ -458,7 +466,7 @@
 
   function renderCalendar(trip, visibleItems){
     if (!calendarStart) calendarStart = defaultCalendarStart(trip);
-    var dayInfo = buildDayInfo(visibleItems);
+    var dayInfo = dayLabels(visibleItems);
     var todayStr = ymd(new Date());
     var days = [];
     for (var i = 0; i < 14; i++) {
@@ -471,29 +479,32 @@
       '<span class="cal-range">' + fmtCalendarRange(days[0], days[13]) + '</span>' +
       '<button type="button" class="cal-nav-btn next" onclick="shiftCalendar(14)" aria-label="Dos semanas después">' + ICONS.chevron + '</button>' +
     '</div>';
-    html += '<div class="cal-grid">' + ['Lu','Ma','Mi','Ju','Vi','Sá','Do'].map(function(w){ return '<div class="cal-wd">' + w + '</div>'; }).join('') + '</div>';
-    html += '<div class="cal-grid">';
+
+    html += '<div class="cal-agenda">';
     days.forEach(function(d){
       var key = ymd(d);
-      var info = dayInfo[key] || { dots: [], staying: false };
+      var info = dayInfo[key] || { labels: [], staying: false };
       var inRange = key >= trip.startDate && key <= trip.endDate;
-      var hasItems = info.dots.length > 0;
-      var cls = 'cal-cell' + (inRange ? '' : ' out') + (key === todayStr ? ' today' : '') +
-        (info.staying ? ' staying' : '') + (hasItems ? ' has-items' : '') + (key === selectedDay ? ' selected' : '');
-      var dotsHtml = info.dots.slice(0, 4).map(function(t){ return '<span class="cal-dot ' + t + '"></span>'; }).join('');
+      var isSelected = key === selectedDay;
+      var wd = d.toLocaleDateString(LOCALE, { weekday: 'short' }).replace(/\.$/, '');
+      var cls = 'cal-row' + (inRange ? '' : ' out') + (key === todayStr ? ' today' : '') +
+        (info.staying ? ' staying' : '') + (isSelected ? ' selected' : '');
+      var bodyHtml = info.labels.length
+        ? info.labels.map(function(l){ return '<div class="cal-label ' + l.type + '">' + esc(l.text) + '</div>'; }).join('')
+        : '<div class="cal-row-empty">Sin planes</div>';
       html += '<button type="button" class="' + cls + '" onclick="selectDay(\'' + key + '\')">' +
-        '<span>' + d.getDate() + '</span>' + (dotsHtml ? '<span class="cal-dots">' + dotsHtml + '</span>' : '') +
+        '<div class="cal-row-date"><span class="cal-row-wd">' + esc(wd.charAt(0).toUpperCase() + wd.slice(1)) + '</span><span class="cal-row-num">' + d.getDate() + '</span></div>' +
+        '<div class="cal-row-body">' + bodyHtml + '</div>' +
       '</button>';
+      if (isSelected) {
+        var dayItems = visibleItems.filter(function(it){ return it.type !== 'hotel' && (it.start || '').slice(0, 10) === key; });
+        html += '<div class="cal-expand">';
+        html += dayItems.length ? '<div class="items">' + dayItems.map(renderItem).join('') + '</div>' : '<div class="cal-empty-note">No hay reservas este día.</div>';
+        html += renderQuickAdd();
+        html += '</div>';
+      }
     });
     html += '</div>';
-
-    if (selectedDay) {
-      var dayItems = visibleItems.filter(function(it){ return it.type !== 'hotel' && (it.start || '').slice(0, 10) === selectedDay; });
-      html += '<div class="day" style="margin-top:8px"><h2>' + fmtDateHeading(selectedDay) + '</h2>';
-      html += dayItems.length ? '<div class="items">' + dayItems.map(renderItem).join('') + '</div>' : '<div class="cal-empty-note">No hay nada agendado este día.</div>';
-      html += renderQuickAdd();
-      html += '</div>';
-    }
     return html;
   }
 
