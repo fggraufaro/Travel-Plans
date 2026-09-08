@@ -90,7 +90,7 @@
   .item-icon.note{ color:var(--ink-soft); }
   .item-main{ flex:1; min-width:0; }
   .item-time{ font-family:"IBM Plex Mono"; font-size:.95rem; font-weight:500; color:var(--ink-soft); }
-  .item-title{ font-weight:600; font-size:1.12rem; margin-top:2px; text-wrap:balance; }
+  .item-title{ display:block; font-weight:600; font-size:1.12rem; margin-top:2px; text-wrap:balance; }
   .item-loc{ display:inline-flex; align-items:center; gap:5px; font-size:.98rem; color:var(--teal); margin-top:3px; text-decoration:none; }
   .item-loc svg{ width:15px; height:15px; flex:none; }
   .item-loc:hover{ text-decoration:underline; }
@@ -360,8 +360,9 @@
       );
     }
     if (item.type === 'hotel') {
+      var hotelQuery = item.title + (item.address ? ', ' + item.address : '');
       return (
-        '<div class="item-title">' + esc(item.title) + '</div>' +
+        '<a class="item-title place-link" href="' + esc(mapsUrl(hotelQuery)) + '" target="_blank" rel="noopener">' + esc(item.title) + '</a>' +
         '<div class="item-route">' + fmtDateTime(item.start) + '<span class="arrow">→</span>' + fmtDateTime(item.end) + '</div>' +
         (item.address ? renderLoc(item.address) : '') +
         renderTravelers(item)
