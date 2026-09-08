@@ -296,6 +296,37 @@
           ],
           "details": "Reserva de 3 noches en una Habitación Doble o Twin Premium, con desayuno incluido, por un total de 1.092,30 €. La tarifa no es reembolsable: cancelar o modificar implica pagar el importe total de la reserva.",
           "attachments": []
+        },
+        {
+          "id": "i_e94d919e29",
+          "type": "train",
+          "title": "Eurostar 9141",
+          "from": "Bruxelles Midi",
+          "to": "London St. Pancras International",
+          "start": "2026-09-25T14:52",
+          "end": "2026-09-25T15:57",
+          "provider": "TrainPal",
+          "confirmation": "1134747818394405",
+          "address": "",
+          "travelers": [
+            "Pablo Guardati",
+            "Viviana Zimmermann"
+          ],
+          "details": "Billete Eurostar Standard por £330, con cambio gratuito antes de las 13:52 del 25 de sep de 2026 y reembolsable antes de las 14:52 del 18 de sep de 2026. Asientos en coche 17, plazas 87 y 88.",
+          "attachments": [
+            {
+              "name": "E-receipt.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747818394405/1788894449409-E-receipt.pdf"
+            },
+            {
+              "name": "Pablo_Bruxelles Midi_to_London St. Pancras International_25_Sep_1452.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747818394405/1788894450028-Pablo_Bruxelles_Midi_to_London_St._Pancras_International_25_Sep_1452.pdf"
+            },
+            {
+              "name": "Viviana_Bruxelles Midi_to_London St. Pancras International_25_Sep_1452.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747818394405/1788894450594-Viviana_Bruxelles_Midi_to_London_St._Pancras_International_25_Sep_1452.pdf"
+            }
+          ]
         }
       ]
     }
