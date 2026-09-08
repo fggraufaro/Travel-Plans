@@ -55,24 +55,6 @@
           "details": "Anfitriona: Sally. Casa/departamento completo para 2 adultos, total £1.335,00 por 8 noches. Cancelación gratuita hasta las 16:00 del 20 de septiembre; después de esa fecha y antes del check-in aplica un reembolso parcial."
         },
         {
-          "type": "train",
-          "title": "Trenitalia 6104",
-          "from": "Aix-En-Provence TGV",
-          "to": "Paris Gare de Lyon",
-          "start": "2026-10-11T10:25",
-          "end": "2026-10-11T13:34",
-          "provider": "TrainPal",
-          "confirmation": "1134747839910509",
-          "address": "",
-          "travelers": [
-            "Paulina Guardati",
-            "Viviana Zimmermann",
-            "Pablo Guardati",
-            "Francisco Gonzalez Grau"
-          ],
-          "details": "Tarifa Standard Allegro (Serenità), coche 4, asientos 6A, 6B, 7A, 7B. Reembolsable y modificable. Todos juntos en este tramo."
-        },
-        {
           "type": "flight",
           "title": "easyJet EZY6606",
           "from": "Paris Charles de Gaulle (Terminal 2D)",
