@@ -87,6 +87,21 @@
           "travelers": [],
           "details": "Confirmación de reserva de tren de TrainPal para el trayecto Brugge a Bruxelles Midi; el correo no incluye más detalles como hora, precio o número de confirmación.",
           "attachments": []
+        },
+        {
+          "id": "i_7726f4b062",
+          "type": "train",
+          "title": "Brugge → Bruxelles Midi",
+          "from": "Brugge",
+          "to": "Bruxelles Midi",
+          "start": "2026-09-07T00:00",
+          "end": "",
+          "provider": "TrainPal",
+          "confirmation": "",
+          "address": "",
+          "travelers": [],
+          "details": "Confirmación de reserva de tren de TrainPal para el trayecto Brugge a Bruxelles Midi; el correo no incluye horario, precio ni número de confirmación visibles en el contenido disponible.",
+          "attachments": []
         }
       ]
     }
