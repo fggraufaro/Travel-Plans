@@ -48,7 +48,15 @@
 
   .app-head{ display:flex; align-items:center; gap:8px; padding:4px 2px 14px; }
   .app-head svg{ width:18px; height:18px; color:var(--coral); flex:none; transform:rotate(45deg); }
-  .app-head span{ font-family:"IBM Plex Mono", monospace; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-faint); }
+  .app-head span{ flex:1; font-family:"IBM Plex Mono", monospace; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-faint); }
+  .help-toggle{ width:26px; height:26px; border-radius:50%; border:1.5px solid var(--line-strong); background:var(--surface); color:var(--ink-soft); font-family:"IBM Plex Sans"; font-weight:600; font-size:.8rem; cursor:pointer; display:flex; align-items:center; justify-content:center; flex:none; }
+  .help-toggle:hover{ border-color:var(--teal); color:var(--teal); }
+
+  .help-card{ background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin-bottom:16px; }
+  .help-block + .help-block{ margin-top:14px; padding-top:14px; border-top:1px dashed var(--line-strong); }
+  .help-block h4{ font-family:"Fraunces", Georgia, serif; font-weight:600; font-size:1.02rem; margin-bottom:8px; color:var(--ink); }
+  .help-block ul{ margin:0; padding-left:18px; font-size:.9rem; color:var(--ink-soft); line-height:1.6; }
+  .help-block li + li{ margin-top:4px; }
 
   .trip-tabs{ display:flex; gap:8px; overflow-x:auto; padding-bottom:10px; margin-bottom:14px; }
   .trip-tab{ flex:none; font-family:"IBM Plex Sans"; font-size:.95rem; font-weight:500; padding:10px 16px; min-height:44px; border-radius:999px; border:1px solid var(--line); background:var(--surface); color:var(--ink-soft); cursor:pointer; white-space:nowrap; }
@@ -399,9 +407,32 @@
     );
   }
 
+  var helpOpen = false;
+  function toggleHelp(){ helpOpen = !helpOpen; render(); }
+  function renderHelp(){
+    return (
+      '<div class="help-card">' +
+      '<div class="help-block"><h4>Para quien mira el itinerario</h4>' +
+        '<ul>' +
+        '<li>Tocá <b>Lista</b> para ver todo en orden, o <b>Calendario</b> para verlo por fecha.</li>' +
+        '<li>Tocá cualquier reserva para ver los detalles y el número de confirmación.</li>' +
+        '<li>Si aparecen nombres arriba de las reservas, tocá el tuyo para ver solo tus reservas.</li>' +
+        '</ul></div>' +
+      '<div class="help-block"><h4>Para quien agrega una reserva</h4>' +
+        '<ul>' +
+        '<li>Tocá el botón <b>+</b> (abajo a la derecha).</li>' +
+        '<li>Arrastrá el archivo del email de confirmación, o pegá el texto directamente.</li>' +
+        '<li>Se procesa automáticamente y la reserva aparece acá en menos de un minuto.</li>' +
+        '</ul></div>' +
+      '</div>'
+    );
+  }
+
   function render(){
     var app = document.getElementById('app');
-    var html = '<div class="app-head">' + ICONS.plane + '<span>Planificador de Visitas Familiares</span></div>';
+    var html = '<div class="app-head">' + ICONS.plane + '<span>Planificador de Visitas Familiares</span>' +
+      '<button class="help-toggle" onclick="toggleHelp()" aria-label="Cómo funciona">' + (helpOpen ? '✕' : '?') + '</button></div>';
+    if (helpOpen) html += renderHelp();
 
     if (!tripsLoaded) {
       html += tripsLoadError
