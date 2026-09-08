@@ -85,6 +85,20 @@
             "Francisco Gonzalez Grau"
           ],
           "details": "Combina directamente con el vuelo de easyJet de arriba. 1 combinación en Birmingham New Street (te quedás en el mismo tren en University). Tarifa dividida — en su mayoría reembolsable/modificable, el tramo final de CrossCountry no es reembolsable. Total £24,60."
+        },
+        {
+          "type": "train",
+          "title": "Brugge → Bruxelles Midi",
+          "from": "Brugge",
+          "to": "Bruxelles Midi",
+          "start": "2026-09-07T00:00",
+          "end": "",
+          "provider": "TrainPal",
+          "confirmation": "",
+          "address": "",
+          "travelers": [],
+          "details": "Confirmación de reserva de tren de TrainPal para el trayecto Brugge a Bruxelles Midi; el correo no incluye horario, precio ni número de confirmación legibles.",
+          "attachments": []
         }
       ]
     }
