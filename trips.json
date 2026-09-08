@@ -24,6 +24,23 @@
           "details": "Coche 16, asientos 27–28 en el Eurostar 9352 hasta Bruxelles Midi, luego combinación con el SNCB 1536 (asiento libre) hasta Brugge. Tarifa Eurostar Plus / SNCB Primera Clase Connection, reembolsable y modificable. Total £267.00."
         },
         {
+          "id": "i_sncb511",
+          "type": "train",
+          "title": "SNCB 511",
+          "from": "Brugge",
+          "to": "Bruxelles Midi",
+          "start": "2026-09-22T11:58",
+          "end": "2026-09-22T12:53",
+          "provider": "SNCB (via TrainPal)",
+          "confirmation": "1134747839953051",
+          "address": "",
+          "travelers": [
+            "Viviana Zimmermann",
+            "Pablo Guardati"
+          ],
+          "details": "2ª clase, tarifa Flex Adulto (BE: Anytime) — reembolsable, no modificable. Total £38,95."
+        },
+        {
           "id": "i_airbnb_cheltenham",
           "type": "hotel",
           "title": "Apartment 1, town centre",
