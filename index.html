@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Europa 2026 — Belgica &amp; Francia</title>
+<title>Europa 2026 — Bélgica &amp; Francia</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ctext y='20' font-size='20'%3E%E2%9C%88%EF%B8%8F%3C/text%3E%3C/svg%3E">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
@@ -155,7 +155,7 @@
           provider: "TrainPal",
           confirmation: "1134747839941095",
           travelers: ["Viviana Zimmermann", "Pablo Guardati"],
-          details: "Coach 16, seats 27–28 on Eurostar 9352 to Bruxelles Midi, then change to SNCB 1536 (any available seat) to Brugge. Eurostar Plus / SNCB First Class Connection, refundable and changeable. £267.00 total."
+          details: "Coche 16, asientos 27–28 en el Eurostar 9352 hasta Bruxelles Midi, luego combinación con el SNCB 1536 (asiento libre) hasta Brugge. Tarifa Eurostar Plus / SNCB Primera Clase Connection, reembolsable y modificable. Total £267.00."
         },
         {
           type: "train",
@@ -167,7 +167,7 @@
           provider: "SNCB (via TrainPal)",
           confirmation: "1134747839953051",
           travelers: ["Viviana Zimmermann", "Pablo Guardati"],
-          details: "2nd class, Flex Adult (BE: Anytime) — refundable, non-exchangeable. £38.95 total."
+          details: "2ª clase, tarifa Flex Adulto (BE: Anytime) — reembolsable, no modificable. Total £38,95."
         },
         {
           type: "hotel",
@@ -178,7 +178,7 @@
           confirmation: "HMKE9DH5EH",
           address: "5 North Pl, Cheltenham GL50 4DW, UK",
           travelers: ["Viviana Zimmermann", "Pablo Guardati"],
-          details: "Hosted by Sally. Entire home/flat for 2 adults, £1,335.00 total for 8 nights. Free cancellation before 16:00 on 20 September; a partial refund applies after that but before check-in."
+          details: "Anfitriona: Sally. Casa/departamento completo para 2 adultos, total £1.335,00 por 8 noches. Cancelación gratuita hasta las 16:00 del 20 de septiembre; después de esa fecha y antes del check-in aplica un reembolso parcial."
         },
         {
           type: "train",
@@ -190,7 +190,7 @@
           provider: "TrainPal",
           confirmation: "1134747839910509",
           travelers: ["Paulina Guardati", "Viviana Zimmermann", "Pablo Guardati", "Francisco Gonzalez Grau"],
-          details: "Standard Allegro (Serenità) fare, Coach 4 seats 6A, 6B, 7A, 7B. Refundable and exchangeable. Everyone together on this leg."
+          details: "Tarifa Standard Allegro (Serenità), coche 4, asientos 6A, 6B, 7A, 7B. Reembolsable y modificable. Todos juntos en este tramo."
         },
         {
           type: "flight",
@@ -202,7 +202,7 @@
           provider: "easyJet",
           confirmation: "KDB4XWR",
           travelers: ["Paulina Guardati", "Francisco Gonzalez Grau"],
-          details: "Auto-assigned seats, small under-seat cabin bag only. €67.30 total."
+          details: "Asientos asignados automáticamente, solo bolso de mano bajo el asiento. Total €67,30."
         },
         {
           type: "train",
@@ -214,7 +214,7 @@
           provider: "TrainPal",
           confirmation: "1134747838549052",
           travelers: ["Paulina Guardati", "Francisco Gonzalez Grau"],
-          details: "Connects straight off the easyJet flight above. 1 change at Birmingham New Street (stay on train at University). Split-ticket fare — mostly refundable/exchangeable, final CrossCountry leg non-refundable. £24.60 total."
+          details: "Combina directamente con el vuelo de easyJet de arriba. 1 combinación en Birmingham New Street (te quedás en el mismo tren en University). Tarifa dividida — en su mayoría reembolsable/modificable, el tramo final de CrossCountry no es reembolsable. Total £24,60."
         }
       ]
     }
@@ -230,7 +230,7 @@
     chevron:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>'
   };
   var TYPE_ICON = { flight:'plane', hotel:'bed', car:'car', train:'train', activity:'star', note:'flag' };
-  var TYPE_LABEL = { flight:'Flight', hotel:'Stay', car:'Car', train:'Train', activity:'Activity', note:'Note' };
+  var TYPE_LABEL = { flight:'Vuelo', hotel:'Alojamiento', car:'Auto', train:'Tren', activity:'Actividad', note:'Nota' };
 
   function esc(s){
     return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
@@ -241,20 +241,22 @@
     if (!str) return new Date(NaN);
     return new Date(str.indexOf('T') === -1 ? str + 'T00:00:00' : str);
   }
+  var LOCALE = 'es-AR';
   function fmtDateHeading(dateStr){
-    return parseLocal(dateStr).toLocaleDateString(undefined, { weekday:'long', month:'long', day:'numeric' });
+    var s = parseLocal(dateStr).toLocaleDateString(LOCALE, { weekday:'long', month:'long', day:'numeric' });
+    return s.charAt(0).toUpperCase() + s.slice(1);
   }
   function fmtDateShort(dateStr){
-    return parseLocal(dateStr).toLocaleDateString(undefined, { month:'short', day:'numeric' });
+    return parseLocal(dateStr).toLocaleDateString(LOCALE, { month:'short', day:'numeric' });
   }
   function fmtRange(a, b){
     var y1 = parseLocal(a).getFullYear(), y2 = parseLocal(b).getFullYear();
-    return parseLocal(a).toLocaleDateString(undefined, { month:'short', day:'numeric', year: y1===y2?undefined:'numeric' })
-      + ' → ' + parseLocal(b).toLocaleDateString(undefined, { month:'short', day:'numeric', year:'numeric' });
+    return parseLocal(a).toLocaleDateString(LOCALE, { month:'short', day:'numeric', year: y1===y2?undefined:'numeric' })
+      + ' → ' + parseLocal(b).toLocaleDateString(LOCALE, { month:'short', day:'numeric', year:'numeric' });
   }
   function fmtTime(dt){
     if (!dt || dt.indexOf('T') === -1) return '';
-    return parseLocal(dt).toLocaleTimeString(undefined, { hour:'numeric', minute:'2-digit' });
+    return parseLocal(dt).toLocaleTimeString(LOCALE, { hour:'numeric', minute:'2-digit' });
   }
 
   var viewMode = 'feed';
@@ -305,7 +307,7 @@
   function fmtDateTime(dt){
     if (!dt) return '';
     var d = parseLocal(dt);
-    return d.toLocaleDateString(undefined, { month:'short', day:'numeric' }) + ', ' + fmtTime(dt);
+    return d.toLocaleDateString(LOCALE, { month:'short', day:'numeric' }) + ', ' + fmtTime(dt);
   }
 
   function renderTravelers(item){
@@ -392,8 +394,9 @@
       var first = new Date(m.year, m.month, 1);
       var daysInMonth = new Date(m.year, m.month + 1, 0).getDate();
       var startWeekday = (first.getDay() + 6) % 7; // Monday = 0
-      html += '<div class="cal-month"><h3>' + first.toLocaleDateString(undefined, { month: 'long', year: 'numeric' }) + '</h3>';
-      html += '<div class="cal-grid">' + ['Mo','Tu','We','Th','Fr','Sa','Su'].map(function(w){ return '<div class="cal-wd">' + w + '</div>'; }).join('') + '</div>';
+      var monthLabel = first.toLocaleDateString(LOCALE, { month: 'long', year: 'numeric' });
+      html += '<div class="cal-month"><h3>' + monthLabel.charAt(0).toUpperCase() + monthLabel.slice(1) + '</h3>';
+      html += '<div class="cal-grid">' + ['Lu','Ma','Mi','Ju','Vi','Sá','Do'].map(function(w){ return '<div class="cal-wd">' + w + '</div>'; }).join('') + '</div>';
       html += '<div class="cal-grid">';
       for (var i = 0; i < startWeekday; i++) html += '<div class="cal-cell empty"></div>';
       for (var day = 1; day <= daysInMonth; day++) {
@@ -431,7 +434,7 @@
         '<div class="item-main">' + renderMain(item) + '</div>' +
       '</div>' +
       ((hasBottom || hasDetails) ? '<div class="tear"></div><div class="item-bottom"' + (hasDetails ? ' onclick="toggleDetails(\'' + uid + '\', this)"' : '') + '>' +
-        '<div class="conf">' + esc(item.provider || '') + (item.confirmation ? (item.provider ? ' · ' : '') + 'Conf <b>' + esc(item.confirmation) + '</b>' : '') + '</div>' +
+        '<div class="conf">' + esc(item.provider || '') + (item.confirmation ? (item.provider ? ' · ' : '') + 'Conf. <b>' + esc(item.confirmation) + '</b>' : '') + '</div>' +
         (hasDetails ? '<span class="chevron">' + ICONS.chevron + '</span>' : '') +
       '</div>' : '') +
       (hasDetails ? '<div class="item-details" id="' + uid + '">' + esc(item.details || '') + '</div>' : '') +
@@ -442,7 +445,7 @@
   function render(){
     var trip = TRIPS.find(function(t){ return t.id === activeTripId; });
     var app = document.getElementById('app');
-    var html = '<div class="app-head">' + ICONS.plane + '<span>Family Visit Planner</span></div>';
+    var html = '<div class="app-head">' + ICONS.plane + '<span>Planificador de Visitas Familiares</span></div>';
 
     if (TRIPS.length > 1) {
       html += '<div class="trip-tabs">' + TRIPS.map(function(t){
@@ -457,24 +460,24 @@
       var today = new Date(); today.setHours(0,0,0,0);
       var days = Math.round((parseLocal(trip.startDate) - today) / 86400000);
       var countdown = '';
-      if (days > 1) countdown = '<div class="countdown"><b>' + days + '</b><span>days to go</span></div>';
-      else if (days === 1) countdown = '<div class="countdown"><b>1</b><span>day to go</span></div>';
-      else if (days === 0) countdown = '<div class="countdown"><b>Today</b><span>it starts</span></div>';
-      else if (parseLocal(trip.endDate) >= today) countdown = '<div class="countdown"><b>Now</b><span>underway</span></div>';
+      if (days > 1) countdown = '<div class="countdown"><b>' + days + '</b><span>días restantes</span></div>';
+      else if (days === 1) countdown = '<div class="countdown"><b>1</b><span>día restante</span></div>';
+      else if (days === 0) countdown = '<div class="countdown"><b>Hoy</b><span>empieza</span></div>';
+      else if (parseLocal(trip.endDate) >= today) countdown = '<div class="countdown"><b>Ahora</b><span>en curso</span></div>';
 
       html += '<div class="hero">' +
         (countdown ? '<div class="hero-top"><span></span>' + countdown + '</div>' : '') +
         '<h1>' + trip.title + '</h1>' +
         '<div class="dates">' + fmtRange(trip.startDate, trip.endDate) + '</div>' +
         '<div class="stats">' +
-          '<div class="stat"><b>' + counts.flight + '</b><span>Flight' + (counts.flight===1?'':'s') + '</span></div>' +
-          '<div class="stat"><b>' + counts.other + '</b><span>Other bookings</span></div>' +
+          '<div class="stat"><b>' + counts.flight + '</b><span>Vuelo' + (counts.flight===1?'':'s') + '</span></div>' +
+          '<div class="stat"><b>' + counts.other + '</b><span>Otras reservas</span></div>' +
         '</div>' +
       '</div>';
 
       html += '<div class="view-toggle">' +
-        '<button class="view-btn" aria-selected="' + (viewMode==='feed') + '" onclick="setView(\'feed\')">Feed</button>' +
-        '<button class="view-btn" aria-selected="' + (viewMode==='calendar') + '" onclick="setView(\'calendar\')">Calendar</button>' +
+        '<button class="view-btn" aria-selected="' + (viewMode==='feed') + '" onclick="setView(\'feed\')">Lista</button>' +
+        '<button class="view-btn" aria-selected="' + (viewMode==='calendar') + '" onclick="setView(\'calendar\')">Calendario</button>' +
       '</div>';
 
       var travelers = allTravelers(trip);
@@ -488,7 +491,7 @@
       if (viewMode === 'calendar') {
         html += renderCalendar(trip, visibleItems);
       } else if (!visibleItems.length) {
-        html += '<div class="filter-empty-note">Nobody selected is on any booking in this trip.</div>';
+        html += '<div class="filter-empty-note">Ninguna de las personas seleccionadas tiene reservas en este viaje.</div>';
       } else {
         var groups = groupByDay(visibleItems);
         groups.forEach(function(g){
@@ -498,8 +501,8 @@
       }
     }
 
-    html += '<div class="footer-note">Updated by asking Claude to edit this page and redeploy — ' +
-      'see the <a href="https://github.com/fggraufaro/Travel-Plans" target="_blank" rel="noopener">source on GitHub</a>.</div>';
+    html += '<div class="footer-note">Se actualiza pidiéndole a Claude que edite esta página y la vuelva a publicar — ' +
+      'mirá el <a href="https://github.com/fggraufaro/Travel-Plans" target="_blank" rel="noopener">código fuente en GitHub</a>.</div>';
 
     app.innerHTML = html;
   }
