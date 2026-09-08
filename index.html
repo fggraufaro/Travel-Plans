@@ -95,6 +95,8 @@
   .item-loc svg{ width:15px; height:15px; flex:none; }
   .item-loc:hover{ text-decoration:underline; }
   .item-route{ font-size:1.05rem; font-weight:600; color:var(--ink); margin-top:2px; line-height:1.5; }
+  .place-link{ color:inherit; text-decoration:underline; text-decoration-style:dotted; text-decoration-color:var(--ink-faint); text-underline-offset:3px; }
+  .place-link:hover{ text-decoration-style:solid; text-decoration-color:currentColor; }
   .item-route .t{ font-family:"IBM Plex Mono"; font-weight:500; font-size:.92rem; color:var(--ink-soft); }
   .item-route .arrow{ color:var(--ink-faint); margin:0 3px; }
   .item-sub{ font-size:.88rem; color:var(--ink-faint); margin-top:2px; }
@@ -343,12 +345,16 @@
     }).join('') + '</div>';
   }
 
+  function linkPlace(name){
+    if (!name) return '';
+    return '<a class="place-link" href="' + esc(mapsUrl(name)) + '" target="_blank" rel="noopener">' + esc(name) + '</a>';
+  }
   function renderMain(item){
     var isRoute = item.type === 'flight' || item.type === 'train' || item.type === 'car';
     if (isRoute) {
       return (
-        '<div class="item-route"><span class="t">' + fmtTime(item.start) + '</span> ' + esc(item.from || '') +
-        '<span class="arrow">→</span><span class="t">' + fmtTime(item.end) + '</span> ' + esc(item.to || '') + '</div>' +
+        '<div class="item-route"><span class="t">' + fmtTime(item.start) + '</span> ' + linkPlace(item.from) +
+        '<span class="arrow">→</span><span class="t">' + fmtTime(item.end) + '</span> ' + linkPlace(item.to) + '</div>' +
         '<div class="item-sub">' + esc(item.title) + '</div>' +
         renderTravelers(item)
       );
