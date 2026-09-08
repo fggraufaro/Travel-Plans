@@ -100,6 +100,47 @@
               "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747839953051/1788885238989-Viviana_Brugge_to_Bruxelles_Midi_22_Sep_1158.pdf"
             }
           ]
+        },
+        {
+          "id": "i_f70bb802e3",
+          "type": "train",
+          "title": "Trenitalia 6104",
+          "from": "Aix-En-Provence TGV",
+          "to": "Paris Gare de Lyon",
+          "start": "2026-10-11T10:25",
+          "end": "2026-10-11T13:34",
+          "provider": "TrainPal",
+          "confirmation": "1134747839910509",
+          "address": "",
+          "travelers": [
+            "Paulina Guardati",
+            "Viviana Zimmermann",
+            "Pablo Guardati",
+            "Francisco Grau"
+          ],
+          "details": "Billete Serenità (Standard Allegro), reembolsable y cambiable, con un precio total de £212.74 pagado con PalWallet y tarjeta Visa.",
+          "attachments": [
+            {
+              "name": "E-receipt.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747839910509/1788885317672-E-receipt.pdf"
+            },
+            {
+              "name": "Viviana_Aix-En-Provence TGV_to_Paris Gare de Lyon_11_Oct_1025.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747839910509/1788885318493-Viviana_Aix-En-Provence_TGV_to_Paris_Gare_de_Lyon_11_Oct_1025.pdf"
+            },
+            {
+              "name": "Francisco_Aix-En-Provence TGV_to_Paris Gare de Lyon_11_Oct_1025.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747839910509/1788885319302-Francisco_Aix-En-Provence_TGV_to_Paris_Gare_de_Lyon_11_Oct_1025.pdf"
+            },
+            {
+              "name": "Pablo_Aix-En-Provence TGV_to_Paris Gare de Lyon_11_Oct_1025.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747839910509/1788885320136-Pablo_Aix-En-Provence_TGV_to_Paris_Gare_de_Lyon_11_Oct_1025.pdf"
+            },
+            {
+              "name": "Paulina_Aix-En-Provence TGV_to_Paris Gare de Lyon_11_Oct_1025.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747839910509/1788885320956-Paulina_Aix-En-Provence_TGV_to_Paris_Gare_de_Lyon_11_Oct_1025.pdf"
+            }
+          ]
         }
       ]
     }
