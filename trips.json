@@ -161,6 +161,42 @@
           ],
           "details": "Vuelo en clase Euro Traveller con tarifa Económica Basic, no reembolsable. El precio total es de 524,20 GBP, incluyendo 80 GBP por equipaje adicional facturado para dos pasajeros.",
           "attachments": []
+        },
+        {
+          "id": "i_625eedbb04",
+          "type": "train",
+          "title": "London Paddington to Cheltenham Spa",
+          "from": "London Paddington",
+          "to": "Cheltenham Spa",
+          "start": "2026-09-25T17:32",
+          "end": "2026-09-25T19:34",
+          "provider": "Great Western Railway",
+          "confirmation": "1134747836774989",
+          "address": "",
+          "travelers": [],
+          "details": "Viaje directo con trasbordo en Swindon (Wilts) para 2 adultos, coche C asientos 63 y 64. El primer tramo es un billete Advance Single no reembolsable pero cambiable, y el segundo es un Off-Peak Day Single reembolsable y cambiable; precio total pagado £122.60 tras un descuento de £70.40 sobre el precio original de £193.00.",
+          "attachments": [
+            {
+              "name": "E-receipt.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747836774989/1788893490805-E-receipt.pdf"
+            },
+            {
+              "name": "passenger_London Paddington_to_Swindon (Wilts)_25_Sep_1732.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747836774989/1788893491514-passenger_London_Paddington_to_Swindon__Wilts__25_Sep_1732.pdf"
+            },
+            {
+              "name": "passenger_London Paddington_to_Swindon (Wilts)_25_Sep_1732_1.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747836774989/1788893491994-passenger_London_Paddington_to_Swindon__Wilts__25_Sep_1732_1.pdf"
+            },
+            {
+              "name": "passenger_Swindon (Wilts)_to_Cheltenham Spa_25_Sep_1830.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747836774989/1788893492491-passenger_Swindon__Wilts__to_Cheltenham_Spa_25_Sep_1830.pdf"
+            },
+            {
+              "name": "passenger_Swindon (Wilts)_to_Cheltenham Spa_25_Sep_1830_1.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747836774989/1788893492768-passenger_Swindon__Wilts__to_Cheltenham_Spa_25_Sep_1830_1.pdf"
+            }
+          ]
         }
       ]
     }
