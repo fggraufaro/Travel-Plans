@@ -141,6 +141,192 @@
               "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747839910509/1788885320956-Paulina_Aix-En-Provence_TGV_to_Paris_Gare_de_Lyon_11_Oct_1025.pdf"
             }
           ]
+        },
+        {
+          "id": "i_ada6519f05",
+          "type": "flight",
+          "title": "BA350",
+          "from": "Londres Heathrow (LHR) Terminal 3",
+          "to": "Marseille Provence (MRS) Terminal 1",
+          "start": "2026-10-03T13:15",
+          "end": "2026-10-03T16:15",
+          "provider": "British Airways",
+          "confirmation": "Z76OBW",
+          "address": "",
+          "travelers": [
+            "Paulina Guardati",
+            "Francisco Gonzalez Grau",
+            "Pablo Guardati",
+            "Viviana Zimmermann"
+          ],
+          "details": "Vuelo en clase Euro Traveller con tarifa Económica Basic, no reembolsable. El precio total es de 524,20 GBP, incluyendo 80 GBP por equipaje adicional facturado para dos pasajeros.",
+          "attachments": []
+        },
+        {
+          "id": "i_625eedbb04",
+          "type": "train",
+          "title": "London Paddington to Cheltenham Spa",
+          "from": "London Paddington",
+          "to": "Cheltenham Spa",
+          "start": "2026-09-25T17:32",
+          "end": "2026-09-25T19:34",
+          "provider": "Great Western Railway",
+          "confirmation": "1134747836774989",
+          "address": "",
+          "travelers": [],
+          "details": "Viaje directo con trasbordo en Swindon (Wilts) para 2 adultos, coche C asientos 63 y 64. El primer tramo es un billete Advance Single no reembolsable pero cambiable, y el segundo es un Off-Peak Day Single reembolsable y cambiable; precio total pagado £122.60 tras un descuento de £70.40 sobre el precio original de £193.00.",
+          "attachments": [
+            {
+              "name": "E-receipt.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747836774989/1788893490805-E-receipt.pdf"
+            },
+            {
+              "name": "passenger_London Paddington_to_Swindon (Wilts)_25_Sep_1732.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747836774989/1788893491514-passenger_London_Paddington_to_Swindon__Wilts__25_Sep_1732.pdf"
+            },
+            {
+              "name": "passenger_London Paddington_to_Swindon (Wilts)_25_Sep_1732_1.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747836774989/1788893491994-passenger_London_Paddington_to_Swindon__Wilts__25_Sep_1732_1.pdf"
+            },
+            {
+              "name": "passenger_Swindon (Wilts)_to_Cheltenham Spa_25_Sep_1830.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747836774989/1788893492491-passenger_Swindon__Wilts__to_Cheltenham_Spa_25_Sep_1830.pdf"
+            },
+            {
+              "name": "passenger_Swindon (Wilts)_to_Cheltenham Spa_25_Sep_1830_1.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747836774989/1788893492768-passenger_Swindon__Wilts__to_Cheltenham_Spa_25_Sep_1830_1.pdf"
+            }
+          ]
+        },
+        {
+          "id": "i_fa167edf51",
+          "type": "hotel",
+          "title": "Dukes' Palace Brugge - by Dukes' Hotel Collection",
+          "from": "",
+          "to": "",
+          "start": "2026-09-19T15:00",
+          "end": "2026-09-22T11:00",
+          "provider": "Booking.com",
+          "confirmation": "5886554890",
+          "address": "Prinsenhof 8, Historic Centre of Brugge, Bruges, 8000, Belgium",
+          "travelers": [
+            "Pablo Guardati"
+          ],
+          "details": "Reserva de 3 noches en habitación Superior Doble o Twin por €972 (IVA incluido), con desayuno incluido. Cancelación gratuita hasta el 15 de septiembre de 2026 a las 23:59; después se cobra el total de la reserva.",
+          "attachments": []
+        },
+        {
+          "id": "i_d565779586",
+          "type": "train",
+          "title": "Eurostar 9339",
+          "from": "Paris Gare du Nord",
+          "to": "Amsterdam Centraal",
+          "start": "2026-09-15T12:12",
+          "end": "2026-09-15T15:50",
+          "provider": "TrainPal",
+          "confirmation": "1134747818571193",
+          "address": "",
+          "travelers": [
+            "Pablo Guardati",
+            "Viviana Zimmermann"
+          ],
+          "details": "Billete Eurostar Standard (Coche 16, asientos 71 y 72) por un total de £172.00. Reembolsable antes del 8 de septiembre de 2026 a las 12:12 y con cambio gratuito hasta las 11:12 del día del viaje.",
+          "attachments": [
+            {
+              "name": "E-receipt.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747818571193/1788893712635-E-receipt.pdf"
+            },
+            {
+              "name": "Pablo_Paris Gare du Nord_to_Amsterdam Centraal_15_Sep_1212.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747818571193/1788893716822-Pablo_Paris_Gare_du_Nord_to_Amsterdam_Centraal_15_Sep_1212.pdf"
+            },
+            {
+              "name": "Viviana_Paris Gare du Nord_to_Amsterdam Centraal_15_Sep_1212.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747818571193/1788893717604-Viviana_Paris_Gare_du_Nord_to_Amsterdam_Centraal_15_Sep_1212.pdf"
+            }
+          ]
+        },
+        {
+          "id": "i_52c5432c0a",
+          "type": "hotel",
+          "title": "NH Collection Amsterdam Flower Market",
+          "from": "",
+          "to": "",
+          "start": "2026-09-15T15:00",
+          "end": "2026-09-19T12:00",
+          "provider": "Booking.com",
+          "confirmation": "5164689704",
+          "address": "Vijzelstraat 4, Amsterdam City Centre, Amsterdam, 1017 HK, Netherlands",
+          "travelers": [
+            "Pablo Guardati"
+          ],
+          "details": "Reserva de 4 noches en una habitación Doble o Twin Premium con desayuno incluido, por un total de €1,495.42 (IVA y tasa municipal incluidos). La tarifa es no reembolsable y no se pueden cambiar las fechas; en caso de cancelación, modificación o no presentación se cobrará el importe total.",
+          "attachments": []
+        },
+        {
+          "id": "i_ce3deea66a",
+          "type": "hotel",
+          "title": "Victoria Palace Hotel",
+          "from": "",
+          "to": "",
+          "start": "2026-09-12T15:00",
+          "end": "2026-09-15T12:00",
+          "provider": "Booking.com",
+          "confirmation": "5859954154",
+          "address": "6 Rue Blaise Desgoffe, 6th arr., Paris, 75006, France",
+          "travelers": [
+            "Pablo Guardati"
+          ],
+          "details": "Reserva de 3 noches en una habitación Classic Double por € 1,232.77 (IVA incluido); la tarifa no es reembolsable y no se pueden cambiar las fechas. Se requiere un depósito de seguridad de € 500 al llegar y se aplica una tasa de ciudad de € 8.45 por persona por noche, no incluida en el total.",
+          "attachments": []
+        },
+        {
+          "id": "i_ac608c8a5e",
+          "type": "hotel",
+          "title": "NH Collection Brussels Grand Sablon",
+          "from": "",
+          "to": "",
+          "start": "2026-09-22T15:00",
+          "end": "2026-09-25T12:00",
+          "provider": "Booking.com",
+          "confirmation": "6342305077",
+          "address": "Rue Bodenbroek 2-4, Brussels, 1000, Belgium",
+          "travelers": [
+            "Paulina Guardati"
+          ],
+          "details": "Reserva de 3 noches en una Habitación Doble o Twin Premium, con desayuno incluido, por un total de 1.092,30 €. La tarifa no es reembolsable: cancelar o modificar implica pagar el importe total de la reserva.",
+          "attachments": []
+        },
+        {
+          "id": "i_e94d919e29",
+          "type": "train",
+          "title": "Eurostar 9141",
+          "from": "Bruxelles Midi",
+          "to": "London St. Pancras International",
+          "start": "2026-09-25T14:52",
+          "end": "2026-09-25T15:57",
+          "provider": "TrainPal",
+          "confirmation": "1134747818394405",
+          "address": "",
+          "travelers": [
+            "Pablo Guardati",
+            "Viviana Zimmermann"
+          ],
+          "details": "Billete Eurostar Standard por £330, con cambio gratuito antes de las 13:52 del 25 de sep de 2026 y reembolsable antes de las 14:52 del 18 de sep de 2026. Asientos en coche 17, plazas 87 y 88.",
+          "attachments": [
+            {
+              "name": "E-receipt.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747818394405/1788894449409-E-receipt.pdf"
+            },
+            {
+              "name": "Pablo_Bruxelles Midi_to_London St. Pancras International_25_Sep_1452.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747818394405/1788894450028-Pablo_Bruxelles_Midi_to_London_St._Pancras_International_25_Sep_1452.pdf"
+            },
+            {
+              "name": "Viviana_Bruxelles Midi_to_London St. Pancras International_25_Sep_1452.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747818394405/1788894450594-Viviana_Bruxelles_Midi_to_London_St._Pancras_International_25_Sep_1452.pdf"
+            }
+          ]
         }
       ]
     }
