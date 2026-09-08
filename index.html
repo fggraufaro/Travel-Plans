@@ -61,6 +61,9 @@
   .trip-tabs{ display:flex; gap:8px; overflow-x:auto; padding-bottom:10px; margin-bottom:14px; }
   .trip-tab{ flex:none; font-family:"IBM Plex Sans"; font-size:.95rem; font-weight:500; padding:10px 16px; min-height:44px; border-radius:999px; border:1px solid var(--line); background:var(--surface); color:var(--ink-soft); cursor:pointer; white-space:nowrap; }
   .trip-tab[aria-selected="true"]{ background:var(--ink); border-color:var(--ink); color:var(--bg); }
+  .trip-tab.past-toggle{ border-style:dashed; color:var(--ink-faint); }
+  .trip-tab.past{ opacity:.7; }
+  .trip-tab.past[aria-selected="true"]{ opacity:1; }
 
   .hero{ position:relative; background:var(--surface); border:1px solid var(--line); border-radius:20px; padding:22px 20px 20px; margin-bottom:22px; overflow:hidden; }
   .hero::before{ content:""; position:absolute; inset:0 0 auto 0; height:5px; background:repeating-linear-gradient(90deg, var(--coral) 0 14px, var(--accent) 14px 28px); }
@@ -128,6 +131,9 @@
   .filter-chip{ font-family:"IBM Plex Sans"; font-weight:500; font-size:.9rem; padding:9px 15px; min-height:40px; border-radius:999px; border:1.5px solid var(--line-strong); background:var(--surface); color:var(--ink-soft); cursor:pointer; }
   .filter-chip[aria-pressed="true"]{ background:var(--teal); border-color:var(--teal); color:#fff; }
   .filter-empty-note{ text-align:center; color:var(--ink-faint); font-size:.92rem; padding:24px 10px; }
+  .past-toggle-btn{ display:flex; align-items:center; justify-content:center; gap:7px; width:100%; margin:18px 0 4px; padding:13px; border:1.5px dashed var(--line-strong); border-radius:14px; background:transparent; color:var(--ink-soft); font-family:"IBM Plex Sans"; font-size:.92rem; font-weight:500; cursor:pointer; }
+  .past-toggle-btn .chevron{ width:17px; height:17px; }
+  .past-section{ opacity:.72; }
 
   .cal-month{ margin-bottom:24px; }
   .cal-month h3{ font-family:"Fraunces", Georgia, serif; font-weight:600; font-size:1.15rem; margin-bottom:10px; color:var(--ink); }
@@ -257,6 +263,19 @@
   var activeFilters = [];
   var activeTypeFilters = [];
   var activeTripId = pickDefaultTrip();
+  var showPastItems = false;
+  var showPastTrips = false;
+
+  function startOfToday(){ var d = new Date(); d.setHours(0,0,0,0); return d; }
+  function isPastItem(item){
+    var ref = item.end || item.start;
+    return !!ref && parseLocal(ref) < startOfToday();
+  }
+  function isPastTrip(trip){
+    return !!trip.endDate && parseLocal(trip.endDate) < startOfToday();
+  }
+  function togglePastItems(){ showPastItems = !showPastItems; render(); }
+  function togglePastTrips(){ showPastTrips = !showPastTrips; render(); }
 
   function firstName(n){ return (n || '').trim().split(/\s+/)[0]; }
   function allTravelers(trip){
@@ -518,9 +537,16 @@
 
     var trip = TRIPS.find(function(t){ return t.id === activeTripId; });
 
-    html += '<div class="trip-tabs">' + TRIPS.map(function(t){
+    var currentTrips = TRIPS.filter(function(t){ return !isPastTrip(t) || t.id === activeTripId; });
+    var pastTrips = TRIPS.filter(function(t){ return isPastTrip(t) && t.id !== activeTripId; });
+    html += '<div class="trip-tabs">' + currentTrips.map(function(t){
       return '<button class="trip-tab" aria-selected="' + (t.id===activeTripId) + '" onclick="selectTrip(\'' + t.id + '\')">' + esc(t.title) + '</button>';
-    }).join('') + '<button class="trip-tab new-trip" onclick="openNewTripPanel()">' + ICONS.plus + '<span>Nuevo viaje</span></button></div>';
+    }).join('') +
+      (pastTrips.length ? '<button class="trip-tab past-toggle" aria-pressed="' + showPastTrips + '" onclick="togglePastTrips()">' + esc(showPastTrips ? 'Ocultar pasados' : 'Viajes pasados (' + pastTrips.length + ')') + '</button>' : '') +
+      (showPastTrips ? pastTrips.map(function(t){
+        return '<button class="trip-tab past" aria-selected="' + (t.id===activeTripId) + '" onclick="selectTrip(\'' + t.id + '\')">' + esc(t.title) + '</button>';
+      }).join('') : '') +
+      '<button class="trip-tab new-trip" onclick="openNewTripPanel()">' + ICONS.plus + '<span>Nuevo viaje</span></button></div>';
 
     if (trip) {
       var visibleItems = trip.items.filter(matchesFilter);
@@ -570,11 +596,29 @@
       } else if (!visibleItems.length) {
         html += '<div class="filter-empty-note">Ningún resultado coincide con este filtro.</div>';
       } else {
-        var groups = groupByDay(visibleItems);
-        groups.forEach(function(g){
-          html += '<div class="day"><h2>' + fmtDateHeading(g.date) + '</h2><div class="items">' +
-            g.items.map(renderItem).join('') + '</div></div>';
-        });
+        var upcomingItems = visibleItems.filter(function(it){ return !isPastItem(it); });
+        var pastItems = visibleItems.filter(isPastItem);
+        if (!upcomingItems.length) {
+          html += '<div class="filter-empty-note">No quedan próximas reservas' + (pastItems.length ? ' — mirá las pasadas abajo' : '') + '.</div>';
+        } else {
+          groupByDay(upcomingItems).forEach(function(g){
+            html += '<div class="day"><h2>' + fmtDateHeading(g.date) + '</h2><div class="items">' +
+              g.items.map(renderItem).join('') + '</div></div>';
+          });
+        }
+        if (pastItems.length) {
+          html += '<button type="button" class="past-toggle-btn" aria-pressed="' + showPastItems + '" onclick="togglePastItems()">' +
+            '<span>' + (showPastItems ? 'Ocultar' : 'Ver') + ' reservas pasadas (' + pastItems.length + ')</span>' +
+            '<span class="chevron' + (showPastItems ? ' open' : '') + '">' + ICONS.chevron + '</span></button>';
+          if (showPastItems) {
+            html += '<div class="past-section">';
+            groupByDay(pastItems).forEach(function(g){
+              html += '<div class="day"><h2>' + fmtDateHeading(g.date) + '</h2><div class="items">' +
+                g.items.map(renderItem).join('') + '</div></div>';
+            });
+            html += '</div>';
+          }
+        }
       }
     }
 
@@ -885,7 +929,7 @@
     }
   }
 
-  function selectTrip(id){ activeTripId = id; selectedDay = null; activeFilters = []; activeTypeFilters = []; render(); }
+  function selectTrip(id){ activeTripId = id; selectedDay = null; activeFilters = []; activeTypeFilters = []; showPastItems = false; render(); }
   function setView(v){ viewMode = v; selectedDay = null; render(); }
   function selectDay(key){ selectedDay = (selectedDay === key) ? null : key; render(); }
   function toggleDetails(id, btn){
