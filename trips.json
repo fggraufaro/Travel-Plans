@@ -279,6 +279,23 @@
           ],
           "details": "Reserva de 3 noches en una habitación Classic Double por € 1,232.77 (IVA incluido); la tarifa no es reembolsable y no se pueden cambiar las fechas. Se requiere un depósito de seguridad de € 500 al llegar y se aplica una tasa de ciudad de € 8.45 por persona por noche, no incluida en el total.",
           "attachments": []
+        },
+        {
+          "id": "i_ac608c8a5e",
+          "type": "hotel",
+          "title": "NH Collection Brussels Grand Sablon",
+          "from": "",
+          "to": "",
+          "start": "2026-09-22T15:00",
+          "end": "2026-09-25T12:00",
+          "provider": "Booking.com",
+          "confirmation": "6342305077",
+          "address": "Rue Bodenbroek 2-4, Brussels, 1000, Belgium",
+          "travelers": [
+            "Paulina Guardati"
+          ],
+          "details": "Reserva de 3 noches en una Habitación Doble o Twin Premium, con desayuno incluido, por un total de 1.092,30 €. La tarifa no es reembolsable: cancelar o modificar implica pagar el importe total de la reserva.",
+          "attachments": []
         }
       ]
     }
