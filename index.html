@@ -135,17 +135,20 @@
   .past-toggle-btn .chevron{ width:17px; height:17px; }
   .past-section{ opacity:.72; }
 
-  .cal-month{ margin-bottom:24px; }
-  .cal-month h3{ font-family:"Fraunces", Georgia, serif; font-weight:600; font-size:1.15rem; margin-bottom:10px; color:var(--ink); }
-  .cal-grid{ display:grid; grid-template-columns:repeat(7,1fr); gap:4px; }
+  .cal-nav{ display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+  .cal-nav-btn{ display:flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:50%; border:1px solid var(--line-strong); background:var(--surface); color:var(--ink); cursor:pointer; }
+  .cal-nav-btn svg{ width:18px; height:18px; }
+  .cal-nav-btn.prev svg{ transform:rotate(90deg); }
+  .cal-nav-btn.next svg{ transform:rotate(-90deg); }
+  .cal-range{ font-family:"Fraunces", Georgia, serif; font-weight:600; font-size:1.1rem; color:var(--ink); text-transform:capitalize; }
+  .cal-grid{ display:grid; grid-template-columns:repeat(7,1fr); gap:4px; margin-bottom:4px; }
   .cal-wd{ text-align:center; font-size:.7rem; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.04em; padding-bottom:4px; }
-  .cal-cell{ aspect-ratio:1; border:1px solid var(--line); border-radius:8px; background:var(--surface); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; font-family:"IBM Plex Mono"; font-size:.85rem; color:var(--ink); padding:2px; }
-  .cal-cell.empty{ border:none; background:transparent; }
+  .cal-cell{ aspect-ratio:1; border:1px solid var(--line); border-radius:8px; background:var(--surface); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; font-family:"IBM Plex Mono"; font-size:.85rem; color:var(--ink); padding:2px; cursor:pointer; }
   .cal-cell.out{ opacity:.35; }
   .cal-cell.today{ border-color:var(--coral); border-width:2px; }
   .cal-cell.staying{ background:color-mix(in srgb, var(--teal) 16%, var(--surface)); }
-  .cal-cell.has-items{ cursor:pointer; font-weight:600; }
-  .cal-cell.has-items:hover{ border-color:var(--ink-faint); }
+  .cal-cell.has-items{ font-weight:600; }
+  .cal-cell:hover{ border-color:var(--ink-faint); }
   .cal-cell.selected{ outline:2px solid var(--ink); outline-offset:1px; }
   .cal-dots{ display:flex; gap:2px; }
   .cal-dot{ width:5px; height:5px; border-radius:50%; background:var(--ink-faint); }
@@ -154,6 +157,10 @@
   .cal-dot.car{ background:var(--accent-strong); }
   .cal-dot.hotel{ background:var(--teal); }
   .cal-dot.note{ background:var(--ink-soft); }
+  .cal-empty-note{ color:var(--ink-faint); font-size:.92rem; padding:10px 0 4px; }
+  .quick-add-btn{ display:flex; align-items:center; justify-content:center; gap:7px; width:100%; margin-top:10px; padding:12px; border:1.5px dashed var(--line-strong); border-radius:14px; background:transparent; color:var(--ink-soft); font-family:"IBM Plex Sans"; font-size:.9rem; font-weight:500; cursor:pointer; }
+  .quick-add-btn svg{ width:16px; height:16px; }
+  .quick-add{ margin-top:10px; padding:14px; border:1px solid var(--line); border-radius:14px; background:var(--surface); }
 
   .fab{ position:fixed; right:20px; bottom:24px; width:56px; height:56px; border-radius:50%; background:var(--coral); color:#fff; border:none; box-shadow:0 8px 20px -6px rgb(0 0 0 / .4); display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:20; }
   .fab svg{ width:24px; height:24px; }
@@ -402,16 +409,28 @@
 
   function ymd(d){ return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); }
 
-  function monthsBetween(startStr, endStr){
-    var start = parseLocal(startStr), end = parseLocal(endStr);
-    var months = [];
-    var cur = new Date(start.getFullYear(), start.getMonth(), 1);
-    var last = new Date(end.getFullYear(), end.getMonth(), 1);
-    while (cur <= last) {
-      months.push({ year: cur.getFullYear(), month: cur.getMonth() });
-      cur = new Date(cur.getFullYear(), cur.getMonth()+1, 1);
-    }
-    return months;
+  var calendarStart = null; // Monday of the first visible week; lazily set per trip
+  function mondayOf(d){
+    var m = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    m.setDate(m.getDate() - ((m.getDay() + 6) % 7));
+    return m;
+  }
+  function defaultCalendarStart(trip){
+    var today = startOfToday();
+    var tripStart = parseLocal(trip.startDate), tripEnd = parseLocal(trip.endDate);
+    var base = (today >= tripStart && today <= tripEnd) ? today : tripStart;
+    return mondayOf(base);
+  }
+  function shiftCalendar(days){
+    calendarStart.setDate(calendarStart.getDate() + days);
+    selectedDay = null;
+    render();
+  }
+  function fmtCalendarRange(d1, d2){
+    var sameYear = d1.getFullYear() === d2.getFullYear();
+    var s1 = d1.toLocaleDateString(LOCALE, { day:'numeric', month:'short' });
+    var s2 = d2.toLocaleDateString(LOCALE, { day:'numeric', month:'short', year: sameYear ? undefined : 'numeric' });
+    return s1 + ' – ' + s2;
   }
 
   function buildDayInfo(items){
@@ -438,40 +457,105 @@
   }
 
   function renderCalendar(trip, visibleItems){
+    if (!calendarStart) calendarStart = defaultCalendarStart(trip);
     var dayInfo = buildDayInfo(visibleItems);
-    var months = monthsBetween(trip.startDate, trip.endDate);
     var todayStr = ymd(new Date());
-    var html = '';
-    months.forEach(function(m){
-      var first = new Date(m.year, m.month, 1);
-      var daysInMonth = new Date(m.year, m.month + 1, 0).getDate();
-      var startWeekday = (first.getDay() + 6) % 7; // Monday = 0
-      var monthLabel = first.toLocaleDateString(LOCALE, { month: 'long', year: 'numeric' });
-      html += '<div class="cal-month"><h3>' + monthLabel.charAt(0).toUpperCase() + monthLabel.slice(1) + '</h3>';
-      html += '<div class="cal-grid">' + ['Lu','Ma','Mi','Ju','Vi','Sá','Do'].map(function(w){ return '<div class="cal-wd">' + w + '</div>'; }).join('') + '</div>';
-      html += '<div class="cal-grid">';
-      for (var i = 0; i < startWeekday; i++) html += '<div class="cal-cell empty"></div>';
-      for (var day = 1; day <= daysInMonth; day++) {
-        var d = new Date(m.year, m.month, day);
-        var key = ymd(d);
-        var info = dayInfo[key] || { dots: [], staying: false };
-        var inRange = key >= trip.startDate && key <= trip.endDate;
-        var hasItems = info.dots.length > 0;
-        var cls = 'cal-cell' + (inRange ? '' : ' out') + (key === todayStr ? ' today' : '') +
-          (info.staying ? ' staying' : '') + (hasItems ? ' has-items' : '') + (key === selectedDay ? ' selected' : '');
-        var dotsHtml = info.dots.slice(0, 4).map(function(t){ return '<span class="cal-dot ' + t + '"></span>'; }).join('');
-        html += '<button type="button" class="' + cls + '"' + (hasItems ? ' onclick="selectDay(\'' + key + '\')"' : '') + '>' +
-          '<span>' + day + '</span>' + (dotsHtml ? '<span class="cal-dots">' + dotsHtml + '</span>' : '') +
-        '</button>';
-      }
-      html += '</div></div>';
+    var days = [];
+    for (var i = 0; i < 14; i++) {
+      var d = new Date(calendarStart); d.setDate(d.getDate() + i);
+      days.push(d);
+    }
+
+    var html = '<div class="cal-nav">' +
+      '<button type="button" class="cal-nav-btn prev" onclick="shiftCalendar(-14)" aria-label="Dos semanas antes">' + ICONS.chevron + '</button>' +
+      '<span class="cal-range">' + fmtCalendarRange(days[0], days[13]) + '</span>' +
+      '<button type="button" class="cal-nav-btn next" onclick="shiftCalendar(14)" aria-label="Dos semanas después">' + ICONS.chevron + '</button>' +
+    '</div>';
+    html += '<div class="cal-grid">' + ['Lu','Ma','Mi','Ju','Vi','Sá','Do'].map(function(w){ return '<div class="cal-wd">' + w + '</div>'; }).join('') + '</div>';
+    html += '<div class="cal-grid">';
+    days.forEach(function(d){
+      var key = ymd(d);
+      var info = dayInfo[key] || { dots: [], staying: false };
+      var inRange = key >= trip.startDate && key <= trip.endDate;
+      var hasItems = info.dots.length > 0;
+      var cls = 'cal-cell' + (inRange ? '' : ' out') + (key === todayStr ? ' today' : '') +
+        (info.staying ? ' staying' : '') + (hasItems ? ' has-items' : '') + (key === selectedDay ? ' selected' : '');
+      var dotsHtml = info.dots.slice(0, 4).map(function(t){ return '<span class="cal-dot ' + t + '"></span>'; }).join('');
+      html += '<button type="button" class="' + cls + '" onclick="selectDay(\'' + key + '\')">' +
+        '<span>' + d.getDate() + '</span>' + (dotsHtml ? '<span class="cal-dots">' + dotsHtml + '</span>' : '') +
+      '</button>';
     });
-    if (selectedDay && dayInfo[selectedDay] && dayInfo[selectedDay].dots.length) {
+    html += '</div>';
+
+    if (selectedDay) {
       var dayItems = visibleItems.filter(function(it){ return it.type !== 'hotel' && (it.start || '').slice(0, 10) === selectedDay; });
-      html += '<div class="day" style="margin-top:8px"><h2>' + fmtDateHeading(selectedDay) + '</h2><div class="items">' +
-        dayItems.map(renderItem).join('') + '</div></div>';
+      html += '<div class="day" style="margin-top:8px"><h2>' + fmtDateHeading(selectedDay) + '</h2>';
+      html += dayItems.length ? '<div class="items">' + dayItems.map(renderItem).join('') + '</div>' : '<div class="cal-empty-note">No hay nada agendado este día.</div>';
+      html += renderQuickAdd();
+      html += '</div>';
     }
     return html;
+  }
+
+  // ---------------- quick-add activity (from calendar) ----------------
+  var quickAddOpen = false;
+  var quickAddTitle = '';
+  var quickAddTime = '';
+  var quickAddSubmitting = false;
+  var quickAddError = '';
+
+  function openQuickAdd(){ quickAddOpen = true; quickAddTitle = ''; quickAddTime = ''; quickAddError = ''; render(); }
+  function closeQuickAdd(){ quickAddOpen = false; render(); }
+
+  function renderQuickAdd(){
+    if (!quickAddOpen) {
+      return '<button type="button" class="quick-add-btn" onclick="openQuickAdd()">' + ICONS.plus + '<span>Agregar actividad</span></button>';
+    }
+    return (
+      '<div class="quick-add">' +
+      '<div class="field"><label>Actividad</label><input type="text" id="quick-add-title" oninput="quickAddTitle=this.value" placeholder="Ej: Museo del Louvre" value="' + esc(quickAddTitle) + '"></div>' +
+      '<div class="field"><label>Hora (opcional)</label><input type="time" id="quick-add-time" oninput="quickAddTime=this.value" value="' + esc(quickAddTime) + '"></div>' +
+      '<div class="sheet-actions"><button type="button" class="btn" onclick="closeQuickAdd()">Cancelar</button>' +
+      '<button type="button" class="btn primary" onclick="submitQuickAdd()" ' + (quickAddSubmitting ? 'disabled' : '') + '>' + (quickAddSubmitting ? '<span class="spinner"></span>' : 'Guardar') + '</button></div>' +
+      (quickAddError ? '<div class="parse-error">' + esc(quickAddError) + '</div>' : '') +
+      '</div>'
+    );
+  }
+
+  async function submitQuickAdd(){
+    var title = (quickAddTitle || '').trim();
+    if (!title) { quickAddError = 'Ponele un nombre a la actividad.'; render(); return; }
+    if (!selectedDay) { quickAddError = 'Elegí un día primero.'; render(); return; }
+    quickAddSubmitting = true; quickAddError = ''; render();
+    try {
+      var res = await fetch(PARSE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'add_item',
+          tripId: activeTripId,
+          item: { type: 'activity', title: title, start: selectedDay + 'T' + (quickAddTime || '00:00') }
+        })
+      });
+      var data = await res.json();
+      quickAddSubmitting = false;
+      if (!res.ok || data.error) {
+        quickAddError = (data.error || 'Algo salió mal.') + (data.detail ? ' — ' + String(data.detail).slice(0, 300) : '');
+        render();
+        return;
+      }
+      if (data.item) {
+        var trip = TRIPS.find(function(t){ return t.id === activeTripId; });
+        if (trip) { trip.items = trip.items || []; trip.items.push(data.item); }
+      }
+      quickAddOpen = false;
+      render();
+      setTimeout(function(){ loadTrips(); }, 15000);
+    } catch (e) {
+      quickAddSubmitting = false;
+      quickAddError = 'No se pudo conectar con el servidor. Probá de nuevo.';
+      render();
+    }
   }
 
   function renderItem(item){
@@ -929,9 +1013,9 @@
     }
   }
 
-  function selectTrip(id){ activeTripId = id; selectedDay = null; activeFilters = []; activeTypeFilters = []; showPastItems = false; render(); }
-  function setView(v){ viewMode = v; selectedDay = null; render(); }
-  function selectDay(key){ selectedDay = (selectedDay === key) ? null : key; render(); }
+  function selectTrip(id){ activeTripId = id; selectedDay = null; activeFilters = []; activeTypeFilters = []; showPastItems = false; calendarStart = null; quickAddOpen = false; render(); }
+  function setView(v){ viewMode = v; selectedDay = null; quickAddOpen = false; render(); }
+  function selectDay(key){ selectedDay = (selectedDay === key) ? null : key; quickAddOpen = false; render(); }
   function toggleDetails(id, btn){
     var el = document.getElementById(id);
     el.classList.toggle('open');
