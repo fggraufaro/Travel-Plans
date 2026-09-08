@@ -84,6 +84,12 @@
   .item-time{ font-family:"IBM Plex Mono"; font-size:.95rem; font-weight:500; color:var(--ink-soft); }
   .item-title{ font-weight:600; font-size:1.12rem; margin-top:2px; text-wrap:balance; }
   .item-loc{ font-size:.98rem; color:var(--ink-soft); margin-top:3px; }
+  .item-route{ font-size:1.05rem; font-weight:600; color:var(--ink); margin-top:2px; line-height:1.5; }
+  .item-route .t{ font-family:"IBM Plex Mono"; font-weight:500; font-size:.92rem; color:var(--ink-soft); }
+  .item-route .arrow{ color:var(--ink-faint); margin:0 3px; }
+  .item-sub{ font-size:.88rem; color:var(--ink-faint); margin-top:2px; }
+  .travelers{ display:flex; flex-wrap:wrap; gap:6px; margin-top:9px; }
+  .traveler-chip{ font-size:.8rem; font-weight:500; padding:3px 10px; border-radius:999px; background:var(--surface-2); color:var(--ink-soft); }
 
   .tear{ position:relative; border-top:1.5px dashed var(--line-strong); }
   .tear::before, .tear::after{ content:""; position:absolute; top:-7px; width:14px; height:14px; border-radius:50%; background:var(--page-notch); }
@@ -112,25 +118,27 @@
       items: [
         {
           type: "train",
-          title: "Amsterdam Centraal → Brugge",
+          title: "Eurostar 9352 / SNCB 1536",
+          from: "Amsterdam Centraal",
+          to: "Brugge",
           start: "2026-09-19T13:10",
           end: "2026-09-19T16:26",
           provider: "TrainPal",
           confirmation: "1134747839941095",
-          location: "Amsterdam Centraal",
-          address: "",
-          details: "Eurostar 9352 (Coach 16, seats 27–28) from Amsterdam Centraal to Bruxelles Midi, then change to SNCB 1536 (any available seat) to Brugge. Eurostar Plus / SNCB First Class Connection, refundable and changeable. Total paid £267.00."
+          travelers: [],
+          details: "Coach 16, seats 27–28 on Eurostar 9352 to Bruxelles Midi, then change to SNCB 1536 (any available seat) to Brugge. Eurostar Plus / SNCB First Class Connection, refundable and changeable. £267.00 total. Travelers not stated on the ticket — confirm who's on this one."
         },
         {
           type: "train",
-          title: "SNCB 511 · Brugge → Bruxelles Midi",
+          title: "SNCB 511",
+          from: "Brugge",
+          to: "Bruxelles Midi",
           start: "2026-09-22T11:58",
           end: "2026-09-22T12:53",
           provider: "SNCB (via TrainPal)",
           confirmation: "1134747839953051",
-          location: "Brugge",
-          address: "",
-          details: "2nd class, Flex Adult (BE: Anytime) — refundable, non-exchangeable. Passengers: Viviana Zimmermann, Pablo Guardati. £38.95 total."
+          travelers: ["Viviana Zimmermann", "Pablo Guardati"],
+          details: "2nd class, Flex Adult (BE: Anytime) — refundable, non-exchangeable. £38.95 total."
         },
         {
           type: "hotel",
@@ -139,42 +147,45 @@
           end: "2026-10-03T10:00",
           provider: "Airbnb",
           confirmation: "HMKE9DH5EH",
-          location: "Apartment 1, town centre (hosted by Sally)",
           address: "5 North Pl, Cheltenham GL50 4DW, UK",
-          details: "Entire home/flat for 2 adults, £1,335.00 total for 8 nights. Free cancellation before 16:00 on 20 September; a partial refund applies after that but before check-in."
+          travelers: [],
+          details: "Hosted by Sally. Entire home/flat for 2 adults, £1,335.00 total for 8 nights. Free cancellation before 16:00 on 20 September; a partial refund applies after that but before check-in. Travelers not stated on the booking — confirm who's staying here."
         },
         {
           type: "train",
-          title: "Trenitalia 6104 · Aix-En-Provence TGV → Paris Gare de Lyon",
+          title: "Trenitalia 6104",
+          from: "Aix-En-Provence TGV",
+          to: "Paris Gare de Lyon",
           start: "2026-10-11T10:25",
           end: "2026-10-11T13:34",
           provider: "TrainPal",
           confirmation: "1134747839910509",
-          location: "Aix-En-Provence TGV",
-          address: "",
-          details: "Standard Allegro (Serenità) fare, Coach 4 seats 6A, 6B, 7A, 7B for Paulina Guardati, Viviana Zimmermann, Pablo Guardati and Francisco Grau. Refundable and exchangeable."
+          travelers: ["Paulina Guardati", "Viviana Zimmermann", "Pablo Guardati", "Francisco Grau"],
+          details: "Standard Allegro (Serenità) fare, Coach 4 seats 6A, 6B, 7A, 7B. Refundable and exchangeable. Everyone together on this leg."
         },
         {
           type: "flight",
-          title: "easyJet EZY6606 · Paris CDG → Birmingham",
+          title: "easyJet EZY6606",
+          from: "Paris Charles de Gaulle (Terminal 2D)",
+          to: "Birmingham",
           start: "2026-10-14T10:00",
           end: "2026-10-14T10:20",
           provider: "easyJet",
           confirmation: "KDB4XWR",
-          location: "Paris Charles de Gaulle (Terminal 2D)",
-          address: "",
-          details: "2 adults (Paulina Guardati, Francisco Gonzalez Grau). Auto-assigned seats, small under-seat cabin bag only. €67.30 total."
+          travelers: ["Paulina Guardati", "Francisco Gonzalez Grau"],
+          details: "Auto-assigned seats, small under-seat cabin bag only. €67.30 total."
         },
         {
           type: "train",
-          title: "Birmingham International → Cheltenham Spa",
+          title: "LNR / WMR / CrossCountry (1 change)",
+          from: "Birmingham International",
+          to: "Cheltenham Spa",
           start: "2026-10-14T11:04",
           end: "2026-10-14T12:14",
           provider: "TrainPal",
           confirmation: "1134747838549052",
-          location: "Birmingham International",
-          address: "",
-          details: "2 adults, 1 change (Birmingham New Street, stay on train at University). Split-ticket fare — mostly refundable/exchangeable, final CrossCountry leg non-refundable. £24.60 total."
+          travelers: ["Paulina Guardati", "Francisco Gonzalez Grau"],
+          details: "Connects straight off the easyJet flight above. 1 change at Birmingham New Street (stay on train at University). Split-ticket fare — mostly refundable/exchangeable, final CrossCountry leg non-refundable. £24.60 total."
         }
       ]
     }
@@ -236,31 +247,66 @@
     return groups;
   }
 
-  function renderItem(item){
-    var icon = ICONS[TYPE_ICON[item.type] || 'flag'];
+  function fmtDateTime(dt){
+    if (!dt) return '';
+    var d = parseLocal(dt);
+    return d.toLocaleDateString(undefined, { month:'short', day:'numeric' }) + ', ' + fmtTime(dt);
+  }
+
+  function renderTravelers(item){
+    if (!item.travelers || !item.travelers.length) return '';
+    return '<div class="travelers">' + item.travelers.map(function(name){
+      return '<span class="traveler-chip">' + esc(name.split(' ')[0]) + '</span>';
+    }).join('') + '</div>';
+  }
+
+  function renderMain(item){
+    var isRoute = item.type === 'flight' || item.type === 'train' || item.type === 'car';
+    if (isRoute) {
+      return (
+        '<div class="item-route"><span class="t">' + fmtTime(item.start) + '</span> ' + esc(item.from || '') +
+        '<span class="arrow">→</span><span class="t">' + fmtTime(item.end) + '</span> ' + esc(item.to || '') + '</div>' +
+        '<div class="item-sub">' + esc(item.title) + '</div>' +
+        renderTravelers(item)
+      );
+    }
+    if (item.type === 'hotel') {
+      return (
+        '<div class="item-title">' + esc(item.title) + '</div>' +
+        '<div class="item-route">' + fmtDateTime(item.start) + '<span class="arrow">→</span>' + fmtDateTime(item.end) + '</div>' +
+        (item.address ? '<div class="item-loc">' + esc(item.address) + '</div>' : '') +
+        renderTravelers(item)
+      );
+    }
     var time = fmtTime(item.start);
     var endBadge = '';
     if (item.end && item.end.slice(0,10) !== item.start.slice(0,10)) {
       endBadge = ' <span class="item-time">→ ' + fmtDateShort(item.end) + (fmtTime(item.end) ? ' ' + fmtTime(item.end) : '') + '</span>';
     }
+    return (
+      '<div class="item-time">' + (time || TYPE_LABEL[item.type] || '') + endBadge + '</div>' +
+      '<div class="item-title">' + esc(item.title) + '</div>' +
+      (item.location ? '<div class="item-loc">' + esc(item.location) + '</div>' : '') +
+      renderTravelers(item)
+    );
+  }
+
+  function renderItem(item){
+    var icon = ICONS[TYPE_ICON[item.type] || 'flag'];
     var hasBottom = item.confirmation || item.provider;
-    var hasDetails = item.details || item.address;
+    var hasDetails = !!item.details;
     var uid = 'd_' + Math.random().toString(36).slice(2,8);
     return (
       '<div class="item">' +
       '<div class="item-top">' +
         '<div class="item-icon ' + item.type + '">' + icon + '</div>' +
-        '<div class="item-main">' +
-          '<div class="item-time">' + (time || TYPE_LABEL[item.type] || '') + endBadge + '</div>' +
-          '<div class="item-title">' + esc(item.title) + '</div>' +
-          (item.location ? '<div class="item-loc">' + esc(item.location) + '</div>' : '') +
-        '</div>' +
+        '<div class="item-main">' + renderMain(item) + '</div>' +
       '</div>' +
       ((hasBottom || hasDetails) ? '<div class="tear"></div><div class="item-bottom"' + (hasDetails ? ' onclick="toggleDetails(\'' + uid + '\', this)"' : '') + '>' +
         '<div class="conf">' + esc(item.provider || '') + (item.confirmation ? (item.provider ? ' · ' : '') + 'Conf <b>' + esc(item.confirmation) + '</b>' : '') + '</div>' +
         (hasDetails ? '<span class="chevron">' + ICONS.chevron + '</span>' : '') +
       '</div>' : '') +
-      (hasDetails ? '<div class="item-details" id="' + uid + '">' + (item.address ? esc(item.address) + '<br>' : '') + esc(item.details || '') + '</div>' : '') +
+      (hasDetails ? '<div class="item-details" id="' + uid + '">' + esc(item.details || '') + '</div>' : '') +
       '</div>'
     );
   }
