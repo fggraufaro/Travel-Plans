@@ -245,6 +245,23 @@
               "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747818571193/1788893717604-Viviana_Paris_Gare_du_Nord_to_Amsterdam_Centraal_15_Sep_1212.pdf"
             }
           ]
+        },
+        {
+          "id": "i_52c5432c0a",
+          "type": "hotel",
+          "title": "NH Collection Amsterdam Flower Market",
+          "from": "",
+          "to": "",
+          "start": "2026-09-15T15:00",
+          "end": "2026-09-19T12:00",
+          "provider": "Booking.com",
+          "confirmation": "5164689704",
+          "address": "Vijzelstraat 4, Amsterdam City Centre, Amsterdam, 1017 HK, Netherlands",
+          "travelers": [
+            "Pablo Guardati"
+          ],
+          "details": "Reserva de 4 noches en una habitación Doble o Twin Premium con desayuno incluido, por un total de €1,495.42 (IVA y tasa municipal incluidos). La tarifa es no reembolsable y no se pueden cambiar las fechas; en caso de cancelación, modificación o no presentación se cobrará el importe total.",
+          "attachments": []
         }
       ]
     }
