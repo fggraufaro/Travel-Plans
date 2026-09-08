@@ -103,19 +103,6 @@
             "Francisco Gonzalez Grau"
           ],
           "details": "Combina directamente con el vuelo de easyJet de arriba. 1 combinación en Birmingham New Street (te quedás en el mismo tren en University). Tarifa dividida — en su mayoría reembolsable/modificable, el tramo final de CrossCountry no es reembolsable. Total £24,60."
-        },
-        {
-          "type": "train",
-          "title": "TestRail Train",
-          "from": "Paris Gare de Lyon",
-          "to": "Lyon Part-Dieu",
-          "start": "2026-10-05T09:00",
-          "end": "2026-10-05T11:00",
-          "provider": "TestRail",
-          "confirmation": "TEST-VERIFY-001",
-          "address": "",
-          "travelers": [],
-          "details": "Esta es una reserva de prueba (TEST BOOKING) que debe ignorarse y puede eliminarse de forma segura."
         }
       ]
     }
