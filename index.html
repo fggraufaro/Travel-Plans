@@ -189,7 +189,7 @@
           end: "2026-10-11T13:34",
           provider: "TrainPal",
           confirmation: "1134747839910509",
-          travelers: ["Paulina Guardati", "Viviana Zimmermann", "Pablo Guardati", "Francisco Grau"],
+          travelers: ["Paulina Guardati", "Viviana Zimmermann", "Pablo Guardati", "Francisco Gonzalez Grau"],
           details: "Standard Allegro (Serenità) fare, Coach 4 seats 6A, 6B, 7A, 7B. Refundable and exchangeable. Everyone together on this leg."
         },
         {
@@ -262,11 +262,13 @@
   var activeFilters = [];
   var activeTripId = pickDefaultTrip();
 
+  function firstName(n){ return (n || '').trim().split(/\s+/)[0]; }
   function allTravelers(trip){
     var seen = {}, names = [];
     trip.items.forEach(function(item){
       (item.travelers || []).forEach(function(n){
-        if (!seen[n]) { seen[n] = true; names.push(n); }
+        var f = firstName(n);
+        if (f && !seen[f]) { seen[f] = true; names.push(f); }
       });
     });
     return names;
@@ -274,7 +276,7 @@
   function matchesFilter(item){
     if (!activeFilters.length) return true;
     if (!item.travelers || !item.travelers.length) return true;
-    return item.travelers.some(function(n){ return activeFilters.indexOf(n) !== -1; });
+    return item.travelers.some(function(n){ return activeFilters.indexOf(firstName(n)) !== -1; });
   }
   function toggleFilter(name){
     var i = activeFilters.indexOf(name);
