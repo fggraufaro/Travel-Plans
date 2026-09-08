@@ -103,7 +103,9 @@
   .tear{ position:relative; border-top:1.5px dashed var(--line-strong); }
   .tear::before, .tear::after{ content:""; position:absolute; top:-7px; width:14px; height:14px; border-radius:50%; background:var(--page-notch); }
   .tear::before{ left:-7px; } .tear::after{ right:-7px; }
-  .item-bottom{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 12px 10px 16px; cursor:pointer; }
+  .item-bottom{ display:flex; flex-direction:column; gap:9px; padding:10px 12px 10px 16px; }
+  .conf-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+  .conf-row.clickable{ cursor:pointer; }
   .conf{ font-size:.92rem; color:var(--ink-soft); }
   .conf b{ font-family:"IBM Plex Mono"; color:var(--ink); letter-spacing:.03em; font-size:1.02rem; }
   .item-details{ padding:0 16px 16px; font-size:1rem; color:var(--ink-soft); line-height:1.55; display:none; }
@@ -169,7 +171,7 @@
 
   .attach-note{ display:flex; align-items:center; gap:8px; font-size:.85rem; color:var(--teal); margin:-4px 0 12px; }
   .attach-note svg{ width:16px; height:16px; flex:none; }
-  .attachments{ display:flex; flex-wrap:wrap; gap:8px; margin-top:9px; }
+  .attachments{ display:flex; flex-wrap:wrap; gap:8px; }
   .attachment-link{ display:inline-flex; align-items:center; gap:5px; font-size:.82rem; font-weight:500; color:var(--teal); text-decoration:none; padding:5px 11px; border-radius:999px; background:var(--surface-2); }
   .attachment-link svg{ width:13px; height:13px; flex:none; }
   .parse-error{ color:#C2493C; font-size:.88rem; margin-top:10px; }
@@ -290,9 +292,24 @@
     }).join('') + '</div>';
   }
 
+  function attachmentOwner(item, filename){
+    if (!item.travelers) return null;
+    var lower = filename.toLowerCase();
+    for (var i = 0; i < item.travelers.length; i++) {
+      var fn = firstName(item.travelers[i]);
+      if (fn && lower.indexOf(fn.toLowerCase()) === 0) return fn;
+    }
+    return null;
+  }
   function renderAttachments(item){
     if (!item.attachments || !item.attachments.length) return '';
-    return '<div class="attachments">' + item.attachments.map(function(a){
+    var visible = item.attachments.filter(function(a){
+      var owner = attachmentOwner(item, a.name || '');
+      if (!owner) return true; // not named for a specific passenger (e.g. a shared e-receipt) — always show
+      return !activeFilters.length || activeFilters.indexOf(owner) !== -1;
+    });
+    if (!visible.length) return '';
+    return '<div class="attachments">' + visible.map(function(a){
       return '<a class="attachment-link" href="' + esc(a.url) + '" target="_blank" rel="noopener">' + ICONS.clip + esc(a.name) + '</a>';
     }).join('') + '</div>';
   }
@@ -304,7 +321,7 @@
         '<div class="item-route"><span class="t">' + fmtTime(item.start) + '</span> ' + esc(item.from || '') +
         '<span class="arrow">→</span><span class="t">' + fmtTime(item.end) + '</span> ' + esc(item.to || '') + '</div>' +
         '<div class="item-sub">' + esc(item.title) + '</div>' +
-        renderTravelers(item) + renderAttachments(item)
+        renderTravelers(item)
       );
     }
     if (item.type === 'hotel') {
@@ -312,7 +329,7 @@
         '<div class="item-title">' + esc(item.title) + '</div>' +
         '<div class="item-route">' + fmtDateTime(item.start) + '<span class="arrow">→</span>' + fmtDateTime(item.end) + '</div>' +
         (item.address ? '<div class="item-loc">' + esc(item.address) + '</div>' : '') +
-        renderTravelers(item) + renderAttachments(item)
+        renderTravelers(item)
       );
     }
     var time = fmtTime(item.start);
@@ -324,7 +341,7 @@
       '<div class="item-time">' + (time || TYPE_LABEL[item.type] || '') + endBadge + '</div>' +
       '<div class="item-title">' + esc(item.title) + '</div>' +
       (item.location ? '<div class="item-loc">' + esc(item.location) + '</div>' : '') +
-      renderTravelers(item) + renderAttachments(item)
+      renderTravelers(item)
     );
   }
 
@@ -404,8 +421,10 @@
 
   function renderItem(item){
     var icon = ICONS[TYPE_ICON[item.type] || 'flag'];
-    var hasBottom = item.confirmation || item.provider;
+    var atts = renderAttachments(item);
+    var hasConf = item.confirmation || item.provider;
     var hasDetails = !!item.details;
+    var hasBottom = hasConf || hasDetails || atts;
     var uid = 'd_' + Math.random().toString(36).slice(2,8);
     return (
       '<div class="item">' +
@@ -414,9 +433,12 @@
         '<div class="item-main">' + renderMain(item) + '</div>' +
         (item.id ? '<div class="item-menu"><button class="icon-btn" onclick="deleteBooking(\'' + esc(item.id) + '\')" aria-label="Eliminar">' + ICONS.trash + '</button></div>' : '') +
       '</div>' +
-      ((hasBottom || hasDetails) ? '<div class="tear"></div><div class="item-bottom"' + (hasDetails ? ' onclick="toggleDetails(\'' + uid + '\', this)"' : '') + '>' +
-        '<div class="conf">' + esc(item.provider || '') + (item.confirmation ? (item.provider ? ' · ' : '') + 'Conf. <b>' + esc(item.confirmation) + '</b>' : '') + '</div>' +
-        (hasDetails ? '<span class="chevron">' + ICONS.chevron + '</span>' : '') +
+      (hasBottom ? '<div class="tear"></div><div class="item-bottom">' +
+        ((hasConf || hasDetails) ? '<div class="conf-row' + (hasDetails ? ' clickable' : '') + '"' + (hasDetails ? ' onclick="toggleDetails(\'' + uid + '\', this)"' : '') + '>' +
+          '<div class="conf">' + esc(item.provider || '') + (item.confirmation ? (item.provider ? ' · ' : '') + 'Conf. <b>' + esc(item.confirmation) + '</b>' : '') + '</div>' +
+          (hasDetails ? '<span class="chevron">' + ICONS.chevron + '</span>' : '') +
+        '</div>' : '') +
+        atts +
       '</div>' : '') +
       (hasDetails ? '<div class="item-details" id="' + uid + '">' + esc(item.details || '') + '</div>' : '') +
       '</div>'
