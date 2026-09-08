@@ -206,6 +206,8 @@
   };
   var TYPE_ICON = { flight:'plane', hotel:'bed', car:'car', train:'train', activity:'star', note:'flag' };
   var TYPE_LABEL = { flight:'Vuelo', hotel:'Alojamiento', car:'Auto', train:'Tren', activity:'Actividad', note:'Nota' };
+  var TYPE_LABEL_PLURAL = { flight:'Vuelos', hotel:'Alojamiento', car:'Autos', train:'Trenes', activity:'Actividades', note:'Notas' };
+  var TYPE_ORDER = ['flight', 'train', 'hotel', 'car', 'activity', 'note'];
 
   function esc(s){
     return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
@@ -237,6 +239,7 @@
   var viewMode = 'feed';
   var selectedDay = null;
   var activeFilters = [];
+  var activeTypeFilters = [];
   var activeTripId = pickDefaultTrip();
 
   function firstName(n){ return (n || '').trim().split(/\s+/)[0]; }
@@ -250,7 +253,13 @@
     });
     return names;
   }
+  function allTypes(trip){
+    var seen = {};
+    trip.items.forEach(function(item){ if (item.type) seen[item.type] = true; });
+    return TYPE_ORDER.filter(function(t){ return seen[t]; });
+  }
   function matchesFilter(item){
+    if (activeTypeFilters.length && activeTypeFilters.indexOf(item.type) === -1) return false;
     if (!activeFilters.length) return true;
     if (!item.travelers || !item.travelers.length) return true;
     return item.travelers.some(function(n){ return activeFilters.indexOf(firstName(n)) !== -1; });
@@ -258,6 +267,12 @@
   function toggleFilter(name){
     var i = activeFilters.indexOf(name);
     if (i === -1) activeFilters.push(name); else activeFilters.splice(i, 1);
+    selectedDay = null;
+    render();
+  }
+  function toggleTypeFilter(type){
+    var i = activeTypeFilters.indexOf(type);
+    if (i === -1) activeTypeFilters.push(type); else activeTypeFilters.splice(i, 1);
     selectedDay = null;
     render();
   }
@@ -454,7 +469,7 @@
         '<ul>' +
         '<li>Tocá <b>Lista</b> para ver todo en orden, o <b>Calendario</b> para verlo por fecha.</li>' +
         '<li>Tocá cualquier reserva para ver los detalles y el número de confirmación.</li>' +
-        '<li>Si aparecen nombres arriba de las reservas, tocá el tuyo para ver solo tus reservas.</li>' +
+        '<li>Usá los filtros de arriba para ver solo cierto tipo (vuelos, trenes, alojamiento...) o solo las reservas de una persona.</li>' +
         '</ul></div>' +
       '<div class="help-block"><h4>Para quien agrega una reserva</h4>' +
         '<ul>' +
@@ -515,6 +530,14 @@
         '<button class="view-btn" aria-selected="' + (viewMode==='calendar') + '" onclick="setView(\'calendar\')">Calendario</button>' +
       '</div>';
 
+      var types = allTypes(trip);
+      if (types.length > 1) {
+        html += '<div class="filter-row filter-row-types">' + types.map(function(type){
+          var pressed = activeTypeFilters.indexOf(type) !== -1;
+          return '<button type="button" class="filter-chip" aria-pressed="' + pressed + '" onclick="toggleTypeFilter(\'' + type + '\')">' + esc(TYPE_LABEL_PLURAL[type] || type) + '</button>';
+        }).join('') + '</div>';
+      }
+
       var travelers = allTravelers(trip);
       if (travelers.length) {
         html += '<div class="filter-row">' + travelers.map(function(name){
@@ -526,7 +549,7 @@
       if (viewMode === 'calendar') {
         html += renderCalendar(trip, visibleItems);
       } else if (!visibleItems.length) {
-        html += '<div class="filter-empty-note">Ninguna de las personas seleccionadas tiene reservas en este viaje.</div>';
+        html += '<div class="filter-empty-note">Ningún resultado coincide con este filtro.</div>';
       } else {
         var groups = groupByDay(visibleItems);
         groups.forEach(function(g){
@@ -779,7 +802,7 @@
     }
   }
 
-  function selectTrip(id){ activeTripId = id; selectedDay = null; activeFilters = []; render(); }
+  function selectTrip(id){ activeTripId = id; selectedDay = null; activeFilters = []; activeTypeFilters = []; render(); }
   function setView(v){ viewMode = v; selectedDay = null; render(); }
   function selectDay(key){ selectedDay = (selectedDay === key) ? null : key; render(); }
   function toggleDetails(id, btn){
