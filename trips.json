@@ -327,6 +327,21 @@
               "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747818394405/1788894450594-Viviana_Bruxelles_Midi_to_London_St._Pancras_International_25_Sep_1452.pdf"
             }
           ]
+        },
+        {
+          "id": "i_e02cd3cd1c",
+          "type": "hotel",
+          "title": "Bastide Toujours Dimanche, Piscine Chauffée & Vue",
+          "from": "",
+          "to": "",
+          "start": "2026-10-03T16:00",
+          "end": "2026-10-07T10:00",
+          "provider": "Airbnb",
+          "confirmation": "HMPAP8EMWN",
+          "address": "Gordes",
+          "travelers": [],
+          "details": "Alojamiento entero para 4 adultos con precio total de £969.01 (incluye impuestos). Cancelación gratuita durante 24 horas, con reembolso parcial si se cancela antes de las 16:00 del 26 de septiembre.",
+          "attachments": []
         }
       ]
     }
