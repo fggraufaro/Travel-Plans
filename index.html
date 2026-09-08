@@ -105,9 +105,14 @@
   .footer-note{ text-align:center; font-size:.85rem; color:var(--ink-faint); margin-top:30px; padding:0 10px; }
   .footer-note a{ color:var(--teal); }
 
-  .view-toggle{ display:flex; gap:8px; margin-bottom:18px; }
+  .view-toggle{ display:flex; gap:8px; margin-bottom:14px; }
   .view-btn{ flex:1; font-family:"IBM Plex Sans"; font-weight:500; font-size:.92rem; padding:10px; min-height:44px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface); color:var(--ink-soft); cursor:pointer; }
   .view-btn[aria-selected="true"]{ background:var(--ink); border-color:var(--ink); color:var(--bg); }
+
+  .filter-row{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+  .filter-chip{ font-family:"IBM Plex Sans"; font-weight:500; font-size:.9rem; padding:9px 15px; min-height:40px; border-radius:999px; border:1.5px solid var(--line-strong); background:var(--surface); color:var(--ink-soft); cursor:pointer; }
+  .filter-chip[aria-pressed="true"]{ background:var(--teal); border-color:var(--teal); color:#fff; }
+  .filter-empty-note{ text-align:center; color:var(--ink-faint); font-size:.92rem; padding:24px 10px; }
 
   .cal-month{ margin-bottom:24px; }
   .cal-month h3{ font-family:"Fraunces", Georgia, serif; font-weight:600; font-size:1.15rem; margin-bottom:10px; color:var(--ink); }
@@ -149,8 +154,8 @@
           end: "2026-09-19T16:26",
           provider: "TrainPal",
           confirmation: "1134747839941095",
-          travelers: [],
-          details: "Coach 16, seats 27–28 on Eurostar 9352 to Bruxelles Midi, then change to SNCB 1536 (any available seat) to Brugge. Eurostar Plus / SNCB First Class Connection, refundable and changeable. £267.00 total. Travelers not stated on the ticket — confirm who's on this one."
+          travelers: ["Viviana Zimmermann", "Pablo Guardati"],
+          details: "Coach 16, seats 27–28 on Eurostar 9352 to Bruxelles Midi, then change to SNCB 1536 (any available seat) to Brugge. Eurostar Plus / SNCB First Class Connection, refundable and changeable. £267.00 total."
         },
         {
           type: "train",
@@ -172,8 +177,8 @@
           provider: "Airbnb",
           confirmation: "HMKE9DH5EH",
           address: "5 North Pl, Cheltenham GL50 4DW, UK",
-          travelers: [],
-          details: "Hosted by Sally. Entire home/flat for 2 adults, £1,335.00 total for 8 nights. Free cancellation before 16:00 on 20 September; a partial refund applies after that but before check-in. Travelers not stated on the booking — confirm who's staying here."
+          travelers: ["Viviana Zimmermann", "Pablo Guardati"],
+          details: "Hosted by Sally. Entire home/flat for 2 adults, £1,335.00 total for 8 nights. Free cancellation before 16:00 on 20 September; a partial refund applies after that but before check-in."
         },
         {
           type: "train",
@@ -254,7 +259,29 @@
 
   var viewMode = 'feed';
   var selectedDay = null;
+  var activeFilters = [];
   var activeTripId = pickDefaultTrip();
+
+  function allTravelers(trip){
+    var seen = {}, names = [];
+    trip.items.forEach(function(item){
+      (item.travelers || []).forEach(function(n){
+        if (!seen[n]) { seen[n] = true; names.push(n); }
+      });
+    });
+    return names;
+  }
+  function matchesFilter(item){
+    if (!activeFilters.length) return true;
+    if (!item.travelers || !item.travelers.length) return true;
+    return item.travelers.some(function(n){ return activeFilters.indexOf(n) !== -1; });
+  }
+  function toggleFilter(name){
+    var i = activeFilters.indexOf(name);
+    if (i === -1) activeFilters.push(name); else activeFilters.splice(i, 1);
+    selectedDay = null;
+    render();
+  }
   function pickDefaultTrip(){
     var today = new Date(); today.setHours(0,0,0,0);
     var upcoming = TRIPS.filter(function(t){ return parseLocal(t.endDate) >= today; })
@@ -354,8 +381,8 @@
     return info;
   }
 
-  function renderCalendar(trip){
-    var dayInfo = buildDayInfo(trip.items);
+  function renderCalendar(trip, visibleItems){
+    var dayInfo = buildDayInfo(visibleItems);
     var months = monthsBetween(trip.startDate, trip.endDate);
     var todayStr = ymd(new Date());
     var html = '';
@@ -383,7 +410,7 @@
       html += '</div></div>';
     });
     if (selectedDay && dayInfo[selectedDay] && dayInfo[selectedDay].dots.length) {
-      var dayItems = trip.items.filter(function(it){ return it.type !== 'hotel' && (it.start || '').slice(0, 10) === selectedDay; });
+      var dayItems = visibleItems.filter(function(it){ return it.type !== 'hotel' && (it.start || '').slice(0, 10) === selectedDay; });
       html += '<div class="day" style="margin-top:8px"><h2>' + fmtDateHeading(selectedDay) + '</h2><div class="items">' +
         dayItems.map(renderItem).join('') + '</div></div>';
     }
@@ -422,8 +449,9 @@
     }
 
     if (trip) {
+      var visibleItems = trip.items.filter(matchesFilter);
       var counts = { flight:0, other:0 };
-      trip.items.forEach(function(i){ if (i.type==='flight') counts.flight++; else counts.other++; });
+      visibleItems.forEach(function(i){ if (i.type==='flight') counts.flight++; else counts.other++; });
       var today = new Date(); today.setHours(0,0,0,0);
       var days = Math.round((parseLocal(trip.startDate) - today) / 86400000);
       var countdown = '';
@@ -447,10 +475,20 @@
         '<button class="view-btn" aria-selected="' + (viewMode==='calendar') + '" onclick="setView(\'calendar\')">Calendar</button>' +
       '</div>';
 
+      var travelers = allTravelers(trip);
+      if (travelers.length) {
+        html += '<div class="filter-row">' + travelers.map(function(name){
+          var pressed = activeFilters.indexOf(name) !== -1;
+          return '<button type="button" class="filter-chip" aria-pressed="' + pressed + '" onclick="toggleFilter(\'' + esc(name).replace(/'/g,"\\'") + '\')">' + esc(name.split(' ')[0]) + '</button>';
+        }).join('') + '</div>';
+      }
+
       if (viewMode === 'calendar') {
-        html += renderCalendar(trip);
+        html += renderCalendar(trip, visibleItems);
+      } else if (!visibleItems.length) {
+        html += '<div class="filter-empty-note">Nobody selected is on any booking in this trip.</div>';
       } else {
-        var groups = groupByDay(trip.items);
+        var groups = groupByDay(visibleItems);
         groups.forEach(function(g){
           html += '<div class="day"><h2>' + fmtDateHeading(g.date) + '</h2><div class="items">' +
             g.items.map(renderItem).join('') + '</div></div>';
@@ -464,7 +502,7 @@
     app.innerHTML = html;
   }
 
-  function selectTrip(id){ activeTripId = id; selectedDay = null; render(); }
+  function selectTrip(id){ activeTripId = id; selectedDay = null; activeFilters = []; render(); }
   function setView(v){ viewMode = v; selectedDay = null; render(); }
   function selectDay(key){ selectedDay = (selectedDay === key) ? null : key; render(); }
   function toggleDetails(id, btn){
