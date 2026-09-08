@@ -262,6 +262,21 @@
           ],
           "details": "Reserva de 4 noches en una habitación Doble o Twin Premium con desayuno incluido, por un total de €1,495.42 (IVA y tasa municipal incluidos). La tarifa es no reembolsable y no se pueden cambiar las fechas; en caso de cancelación, modificación o no presentación se cobrará el importe total.",
           "attachments": []
+        },
+        {
+          "id": "i_b9e60c6086",
+          "type": "hotel",
+          "title": "Victoria Palace Hotel",
+          "from": "",
+          "to": "",
+          "start": "2026-09-01T00:00",
+          "end": "",
+          "provider": "Booking.com",
+          "confirmation": "",
+          "address": "",
+          "travelers": [],
+          "details": "Confirmación de reserva en el Victoria Palace Hotel gestionada a través de Booking.com; el correo no contiene más detalles legibles sobre fechas, precio o política de cancelación.",
+          "attachments": []
         }
       ]
     }
