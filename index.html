@@ -625,7 +625,7 @@
       var data = await res.json();
       addSubmitting = false;
       if (!res.ok || data.error) {
-        addError = data.error || 'Algo salió mal. Probá de nuevo en un momento.';
+        addError = (data.error || 'Algo salió mal. Probá de nuevo en un momento.') + (data.detail ? ' — ' + String(data.detail).slice(0, 300) : '');
         render();
         return;
       }
