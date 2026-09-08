@@ -277,6 +277,23 @@
           "travelers": [],
           "details": "Confirmación de reserva en el Victoria Palace Hotel gestionada a través de Booking.com; el correo no contiene más detalles legibles sobre fechas, precio o política de cancelación.",
           "attachments": []
+        },
+        {
+          "id": "i_ce3deea66a",
+          "type": "hotel",
+          "title": "Victoria Palace Hotel",
+          "from": "",
+          "to": "",
+          "start": "2026-09-12T15:00",
+          "end": "2026-09-15T12:00",
+          "provider": "Booking.com",
+          "confirmation": "5859954154",
+          "address": "6 Rue Blaise Desgoffe, 6th arr., Paris, 75006, France",
+          "travelers": [
+            "Pablo Guardati"
+          ],
+          "details": "Reserva de 3 noches en una habitación Classic Double por € 1,232.77 (IVA incluido); la tarifa no es reembolsable y no se pueden cambiar las fechas. Se requiere un depósito de seguridad de € 500 al llegar y se aplica una tasa de ciudad de € 8.45 por persona por noche, no incluida en el total.",
+          "attachments": []
         }
       ]
     }
