@@ -91,7 +91,9 @@
   .item-main{ flex:1; min-width:0; }
   .item-time{ font-family:"IBM Plex Mono"; font-size:.95rem; font-weight:500; color:var(--ink-soft); }
   .item-title{ font-weight:600; font-size:1.12rem; margin-top:2px; text-wrap:balance; }
-  .item-loc{ font-size:.98rem; color:var(--ink-soft); margin-top:3px; }
+  .item-loc{ display:inline-flex; align-items:center; gap:5px; font-size:.98rem; color:var(--teal); margin-top:3px; text-decoration:none; }
+  .item-loc svg{ width:15px; height:15px; flex:none; }
+  .item-loc:hover{ text-decoration:underline; }
   .item-route{ font-size:1.05rem; font-weight:600; color:var(--ink); margin-top:2px; line-height:1.5; }
   .item-route .t{ font-family:"IBM Plex Mono"; font-weight:500; font-size:.92rem; color:var(--ink-soft); }
   .item-route .arrow{ color:var(--ink-faint); margin:0 3px; }
@@ -207,13 +209,20 @@
     plus:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
     x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
     clip:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12l6.5-6.5a3 3 0 0 1 4.24 4.24L11 17.5a5 5 0 1 1-7.07-7.07L11.5 3"/></svg>',
-    trash:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M9.5 7V4.6a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1V7"/><path d="M6.5 7l.9 12.4a1.6 1.6 0 0 0 1.6 1.5h6a1.6 1.6 0 0 0 1.6-1.5L17.5 7"/></svg>'
+    trash:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M9.5 7V4.6a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1V7"/><path d="M6.5 7l.9 12.4a1.6 1.6 0 0 0 1.6 1.5h6a1.6 1.6 0 0 0 1.6-1.5L17.5 7"/></svg>',
+    pin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.4-7-11.5A7 7 0 0 1 19 9.5C19 14.6 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>'
   };
   var TYPE_ICON = { flight:'plane', hotel:'bed', car:'car', train:'train', activity:'star', note:'flag' };
   var TYPE_LABEL = { flight:'Vuelo', hotel:'Alojamiento', car:'Auto', train:'Tren', activity:'Actividad', note:'Nota' };
   var TYPE_LABEL_PLURAL = { flight:'Vuelos', hotel:'Alojamiento', car:'Autos', train:'Trenes', activity:'Actividades', note:'Notas' };
   var TYPE_ORDER = ['flight', 'train', 'hotel', 'car', 'activity', 'note'];
 
+  function mapsUrl(address){
+    return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(address);
+  }
+  function renderLoc(address){
+    return '<a class="item-loc" href="' + esc(mapsUrl(address)) + '" target="_blank" rel="noopener">' + ICONS.pin + '<span>' + esc(address) + '</span></a>';
+  }
   function esc(s){
     return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
       return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
@@ -348,7 +357,7 @@
       return (
         '<div class="item-title">' + esc(item.title) + '</div>' +
         '<div class="item-route">' + fmtDateTime(item.start) + '<span class="arrow">→</span>' + fmtDateTime(item.end) + '</div>' +
-        (item.address ? '<div class="item-loc">' + esc(item.address) + '</div>' : '') +
+        (item.address ? renderLoc(item.address) : '') +
         renderTravelers(item)
       );
     }
@@ -360,7 +369,7 @@
     return (
       '<div class="item-time">' + (time || TYPE_LABEL[item.type] || '') + endBadge + '</div>' +
       '<div class="item-title">' + esc(item.title) + '</div>' +
-      (item.location ? '<div class="item-loc">' + esc(item.location) + '</div>' : '') +
+      (item.location ? renderLoc(item.location) : '') +
       renderTravelers(item)
     );
   }
