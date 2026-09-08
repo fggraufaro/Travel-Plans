@@ -164,6 +164,11 @@
   .field{ margin-bottom:12px; }
   .field label{ display:block; font-size:.82rem; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-soft); margin-bottom:6px; }
   .field textarea{ width:100%; min-height:100px; font-family:"IBM Plex Mono"; font-size:.85rem; padding:11px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface); color:var(--ink); resize:vertical; }
+  .field input[type="text"], .field input[type="date"]{ width:100%; font-family:"IBM Plex Sans"; font-size:.95rem; padding:11px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface); color:var(--ink); box-sizing:border-box; }
+  .field-row{ display:flex; gap:10px; }
+  .field-row .field{ flex:1; }
+  .trip-tab.new-trip{ display:flex; align-items:center; gap:5px; color:var(--ink-soft); background:transparent; border-style:dashed; }
+  .trip-tab.new-trip svg{ width:16px; height:16px; }
 
   .dropzone{ display:flex; flex-direction:column; align-items:center; gap:8px; padding:22px 16px; border:2px dashed var(--line-strong); border-radius:14px; text-align:center; color:var(--ink-soft); font-size:.9rem; cursor:pointer; margin-bottom:14px; }
   .dropzone svg{ width:22px; height:22px; color:var(--ink-faint); }
@@ -497,11 +502,9 @@
 
     var trip = TRIPS.find(function(t){ return t.id === activeTripId; });
 
-    if (TRIPS.length > 1) {
-      html += '<div class="trip-tabs">' + TRIPS.map(function(t){
-        return '<button class="trip-tab" aria-selected="' + (t.id===activeTripId) + '" onclick="selectTrip(\'' + t.id + '\')">' + esc(t.title) + '</button>';
-      }).join('') + '</div>';
-    }
+    html += '<div class="trip-tabs">' + TRIPS.map(function(t){
+      return '<button class="trip-tab" aria-selected="' + (t.id===activeTripId) + '" onclick="selectTrip(\'' + t.id + '\')">' + esc(t.title) + '</button>';
+    }).join('') + '<button class="trip-tab new-trip" onclick="openNewTripPanel()">' + ICONS.plus + '<span>Nuevo viaje</span></button></div>';
 
     if (trip) {
       var visibleItems = trip.items.filter(matchesFilter);
@@ -561,6 +564,7 @@
 
     html += '<button class="fab" onclick="openAddPanel()" aria-label="Agregar reserva">' + ICONS.plus + '</button>';
     if (addPanelOpen) html += renderAddPanel();
+    if (newTripPanelOpen) html += renderNewTripPanel();
 
     html += '<div class="footer-note">Arrastrá o subí un email de confirmación con el botón + para agregarlo — ' +
       'mirá el <a href="https://github.com/fggraufaro/Travel-Plans" target="_blank" rel="noopener">código fuente en GitHub</a>.</div>';
@@ -595,6 +599,69 @@
       (addSuccess ? '<div class="parse-success">' + esc(addSuccess) + '</div>' : '') +
       '</div></div>'
     );
+  }
+
+  // ---------------- new trip ----------------
+  var newTripPanelOpen = false;
+  var newTripTitle = '';
+  var newTripStart = '';
+  var newTripEnd = '';
+  var newTripSubmitting = false;
+  var newTripError = '';
+
+  function openNewTripPanel(){ newTripPanelOpen = true; newTripTitle = ''; newTripStart = ''; newTripEnd = ''; newTripError = ''; render(); }
+  function closeNewTripPanel(){ newTripPanelOpen = false; render(); }
+
+  function renderNewTripPanel(){
+    return (
+      '<div class="overlay" onclick="if(event.target===this)closeNewTripPanel()"><div class="sheet">' +
+      '<div class="sheet-head"><h3>Nuevo viaje</h3><button class="icon-btn" onclick="closeNewTripPanel()">' + ICONS.x + '</button></div>' +
+      '<div class="field"><label>Nombre</label><input type="text" id="new-trip-title" oninput="newTripTitle=this.value" placeholder="Ej: Reino Unido &amp; Portugal" value="' + esc(newTripTitle) + '"></div>' +
+      '<div class="field-row">' +
+        '<div class="field"><label>Desde</label><input type="date" id="new-trip-start" oninput="newTripStart=this.value" value="' + esc(newTripStart) + '"></div>' +
+        '<div class="field"><label>Hasta</label><input type="date" id="new-trip-end" oninput="newTripEnd=this.value" value="' + esc(newTripEnd) + '"></div>' +
+      '</div>' +
+      '<div class="sheet-actions"><button class="btn" onclick="closeNewTripPanel()">Cancelar</button>' +
+      '<button class="btn primary" onclick="submitNewTrip()" ' + (newTripSubmitting ? 'disabled' : '') + '>' + (newTripSubmitting ? '<span class="spinner"></span> Creando…' : 'Crear viaje') + '</button></div>' +
+      (newTripError ? '<div class="parse-error">' + esc(newTripError) + '</div>' : '') +
+      '</div></div>'
+    );
+  }
+
+  async function submitNewTrip(){
+    var title = (newTripTitle || '').trim();
+    if (!title) { newTripError = 'Ponele un nombre al viaje.'; render(); return; }
+    if (!newTripStart || !newTripEnd) { newTripError = 'Elegí las fechas de inicio y fin.'; render(); return; }
+    if (newTripEnd < newTripStart) { newTripError = 'La fecha de fin no puede ser antes que la de inicio.'; render(); return; }
+    newTripSubmitting = true; newTripError = ''; render();
+    try {
+      var res = await fetch(PARSE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'create_trip', title: title, startDate: newTripStart, endDate: newTripEnd })
+      });
+      var data = await res.json();
+      newTripSubmitting = false;
+      if (!res.ok || data.error) {
+        newTripError = (data.error || 'Algo salió mal. Probá de nuevo en un momento.') + (data.detail ? ' — ' + String(data.detail).slice(0, 300) : '');
+        render();
+        return;
+      }
+      newTripPanelOpen = false;
+      if (data.trip) {
+        TRIPS.push(data.trip);
+        activeTripId = data.trip.id;
+        selectedDay = null;
+        activeFilters = [];
+        activeTypeFilters = [];
+      }
+      render();
+      setTimeout(function(){ loadTrips(); }, 15000);
+    } catch (e) {
+      newTripSubmitting = false;
+      newTripError = 'No se pudo conectar con el servidor. Probá de nuevo.';
+      render();
+    }
   }
 
   function decodeQuotedPrintable(s){
@@ -777,7 +844,7 @@
       var res = await fetch(PARSE_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: text, attachments: addAttachments })
+        body: JSON.stringify({ text: text, attachments: addAttachments, tripId: activeTripId })
       });
       var data = await res.json();
       addSubmitting = false;
