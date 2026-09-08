@@ -141,6 +141,26 @@
               "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747839910509/1788885320956-Paulina_Aix-En-Provence_TGV_to_Paris_Gare_de_Lyon_11_Oct_1025.pdf"
             }
           ]
+        },
+        {
+          "id": "i_ada6519f05",
+          "type": "flight",
+          "title": "BA350",
+          "from": "Londres Heathrow (LHR) Terminal 3",
+          "to": "Marseille Provence (MRS) Terminal 1",
+          "start": "2026-10-03T13:15",
+          "end": "2026-10-03T16:15",
+          "provider": "British Airways",
+          "confirmation": "Z76OBW",
+          "address": "",
+          "travelers": [
+            "Paulina Guardati",
+            "Francisco Gonzalez Grau",
+            "Pablo Guardati",
+            "Viviana Zimmermann"
+          ],
+          "details": "Vuelo en clase Euro Traveller con tarifa Económica Basic, no reembolsable. El precio total es de 524,20 GBP, incluyendo 80 GBP por equipaje adicional facturado para dos pasajeros.",
+          "attachments": []
         }
       ]
     }
