@@ -880,8 +880,16 @@
   }
   function extractEmailText(raw){
     var parts = splitMimeParts(raw);
-    // No multipart structure at all — likely already a simple message; bound it defensively.
-    if (!parts) return raw.slice(0, 8000);
+    if (!parts) {
+      // No multipart boundary — a genuine single-part message (e.g. Content-Type: text/html
+      // directly in the top-level headers). Decode it the same way a leaf MIME part would be:
+      // strip headers, undo quoted-printable/base64, then strip HTML if that's the content type.
+      var headerEnd = raw.search(/\r?\n\r?\n/);
+      var topHeader = headerEnd === -1 ? '' : raw.slice(0, headerEnd);
+      var decoded = decodePart(raw);
+      if (decoded) return /Content-Type:\s*text\/html/i.test(topHeader) ? htmlToText(decoded) : decoded.trim();
+      return raw.slice(0, 8000);
+    }
     for (var i = 0; i < parts.length; i++) {
       if (/Content-Type:\s*text\/plain/i.test(parts[i]) && !/Content-Disposition:\s*attachment/i.test(parts[i])) {
         var body = decodePart(parts[i]);

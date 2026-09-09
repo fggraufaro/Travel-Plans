@@ -354,18 +354,19 @@
         {
           "id": "i_7f50a52745",
           "type": "flight",
-          "title": "easyJet booking KDBP9GX",
-          "from": "",
-          "to": "",
-          "start": "2026-09-09T00:00",
-          "end": "",
+          "title": "EZY2306",
+          "from": "Madrid (T1)",
+          "to": "London Luton",
+          "start": "2026-11-02T10:35",
+          "end": "2026-11-02T12:00",
           "provider": "easyJet",
           "confirmation": "KDBP9GX",
           "address": "",
           "travelers": [
-            "FRANCISCO GONZALEZ GRAU"
+            "Gustavo Gonzalez",
+            "Mariana Grau"
           ],
-          "details": "El correo de confirmación de easyJet no incluye los detalles completos del vuelo (ruta, fechas u horarios) en el texto proporcionado, solo el número de referencia de la reserva.",
+          "details": "Solo equipaje de cabina (un bolso pequeño bajo el asiento y uno grande en el compartimento superior por pasajero), asientos asignados automáticamente. Pago de €133,96 con débito Visa el 09/09/2026.",
           "attachments": []
         }
       ]
