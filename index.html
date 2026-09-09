@@ -166,6 +166,11 @@
   .cal-label.location{ background:transparent; border:1px dashed var(--line-strong); color:var(--ink-soft); font-weight:600; }
   .cal-label.location svg{ width:12px; height:12px; flex:none; }
   .cal-expand{ padding:2px 0 6px; }
+  .loc-chip{ display:flex; align-items:center; gap:9px; padding:9px 8px 9px 13px; margin-bottom:10px; border:1px dashed var(--line-strong); border-radius:12px; }
+  .loc-chip svg{ width:15px; height:15px; flex:none; color:var(--ink-faint); }
+  .loc-chip span{ flex:1; font-weight:600; font-size:.98rem; color:var(--ink); }
+  .loc-chip .icon-btn{ width:32px; height:32px; }
+  .loc-chip .icon-btn svg{ width:17px; height:17px; color:inherit; }
   .cal-empty-note{ color:var(--ink-faint); font-size:.92rem; padding:10px 0 4px; }
   .quick-add-btn{ display:flex; align-items:center; justify-content:center; gap:7px; width:100%; margin-top:10px; padding:12px; border:1.5px dashed var(--line-strong); border-radius:14px; background:transparent; color:var(--ink-soft); font-family:"IBM Plex Sans"; font-size:.9rem; font-weight:500; cursor:pointer; }
   .quick-add-btn svg{ width:16px; height:16px; }
@@ -483,6 +488,12 @@
     return info;
   }
 
+  function renderLocationChip(item){
+    return '<div class="loc-chip">' + ICONS.pin + '<span>' + esc(item.title) + '</span>' +
+      (item.id ? '<button type="button" class="icon-btn" onclick="deleteBooking(\'' + esc(item.id) + '\')" aria-label="Eliminar">' + ICONS.trash + '</button>' : '') +
+    '</div>';
+  }
+
   function renderCalendar(trip, visibleItems){
     if (!calendarStart) calendarStart = defaultCalendarStart(trip);
     var dayInfo = dayLabels(visibleItems);
@@ -516,9 +527,12 @@
         '<div class="cal-row-body">' + bodyHtml + '</div>' +
       '</button>';
       if (isSelected) {
-        var dayItems = visibleItems.filter(function(it){ return it.type !== 'hotel' && (it.start || '').slice(0, 10) === key; });
+        var dayAll = visibleItems.filter(function(it){ return it.type !== 'hotel' && (it.start || '').slice(0, 10) === key; });
+        var dayLocations = dayAll.filter(function(it){ return it.type === 'location'; });
+        var dayItems = dayAll.filter(function(it){ return it.type !== 'location'; });
         html += '<div class="cal-expand">';
-        html += dayItems.length ? '<div class="items">' + dayItems.map(renderItem).join('') + '</div>' : '<div class="cal-empty-note">No hay reservas este día.</div>';
+        html += dayLocations.map(renderLocationChip).join('');
+        html += dayItems.length ? '<div class="items">' + dayItems.map(renderItem).join('') + '</div>' : (dayLocations.length ? '' : '<div class="cal-empty-note">No hay reservas este día.</div>');
         html += renderQuickAdd();
         html += '</div>';
       }
