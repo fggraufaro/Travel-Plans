@@ -543,6 +543,21 @@
           "travelers": [],
           "details": "",
           "attachments": []
+        },
+        {
+          "id": "i_6c926430c6",
+          "type": "location",
+          "title": "London / Cheltenham",
+          "from": "",
+          "to": "",
+          "start": "2026-11-04T00:00",
+          "end": "",
+          "provider": "",
+          "confirmation": "",
+          "address": "",
+          "travelers": [],
+          "details": "",
+          "attachments": []
         }
       ]
     }
