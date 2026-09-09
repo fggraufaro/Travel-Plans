@@ -432,8 +432,11 @@
   function defaultCalendarStart(trip){
     var today = startOfToday();
     var tripStart = parseLocal(trip.startDate), tripEnd = parseLocal(trip.endDate);
-    var base = (today >= tripStart && today <= tripEnd) ? today : tripStart;
-    return mondayOf(base);
+    // While the trip is under way, show the week containing today (Monday-aligned, for context).
+    // Otherwise start right on the trip's first day — aligning to Monday here would pad the top
+    // of the calendar with empty days before the trip even begins.
+    if (today >= tripStart && today <= tripEnd) return mondayOf(today);
+    return tripStart;
   }
   function shiftCalendar(days){
     calendarStart.setDate(calendarStart.getDate() + days);
