@@ -408,6 +408,21 @@
               "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/618774355600/1788963311285-voucher_flight_D-202608182323-2635bf8c-c13e-4bf5-9601-4639f9edcbd9.pdf"
             }
           ]
+        },
+        {
+          "id": "i_7a647ab13a",
+          "type": "activity",
+          "title": "London",
+          "from": "",
+          "to": "",
+          "start": "2026-11-02T00:00",
+          "end": "",
+          "provider": "",
+          "confirmation": "",
+          "address": "",
+          "travelers": [],
+          "details": "",
+          "attachments": []
         }
       ]
     }
