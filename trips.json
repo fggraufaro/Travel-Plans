@@ -381,11 +381,31 @@
           "confirmation": "618774355600",
           "address": "",
           "travelers": [],
-          "details": "Vuelo ida y vuelta para 2 adultos con Aerolíneas Argentinas, directo, sin equipaje para despachar incluido. El regreso es el 17 de noviembre desde MAD (19:05) a EZE (04:10); el total pagado fue de US$2.482,00 con tarjeta Visa Banco Galicia.",
+          "details": "Vuelo directo de ida, no incluye equipaje para despachar, duración 12h 15m. Compra realizada por Despegar.com por un total de US$2.482,00 para 2 adultos.",
           "attachments": [
             {
               "name": "voucher_flight_D-202608182323-2635bf8c-c13e-4bf5-9601-4639f9edcbd9.pdf",
               "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/618774355600/1788962345653-voucher_flight_D-202608182323-2635bf8c-c13e-4bf5-9601-4639f9edcbd9.pdf"
+            }
+          ]
+        },
+        {
+          "id": "i_6c60e95da3",
+          "type": "flight",
+          "title": "Vuelo Madrid - Buenos Aires",
+          "from": "MAD",
+          "to": "EZE",
+          "start": "2026-11-17T19:05",
+          "end": "2026-11-18T04:10",
+          "provider": "Aerolíneas Argentinas",
+          "confirmation": "618774355600",
+          "address": "",
+          "travelers": [],
+          "details": "Vuelo directo de vuelta, no incluye equipaje para despachar, duración 13h 5m. Forma parte de la reserva ida y vuelta pagada en un pago con tarjeta Visa Banco Galicia.",
+          "attachments": [
+            {
+              "name": "voucher_flight_D-202608182323-2635bf8c-c13e-4bf5-9601-4639f9edcbd9.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/618774355600/1788963311285-voucher_flight_D-202608182323-2635bf8c-c13e-4bf5-9601-4639f9edcbd9.pdf"
             }
           ]
         }
