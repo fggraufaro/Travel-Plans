@@ -368,6 +368,26 @@
           ],
           "details": "Solo equipaje de cabina (un bolso pequeño bajo el asiento y uno grande en el compartimento superior por pasajero), asientos asignados automáticamente. Pago de €133,96 con débito Visa el 09/09/2026.",
           "attachments": []
+        },
+        {
+          "id": "i_e3aaaf1e7a",
+          "type": "flight",
+          "title": "Vuelo Buenos Aires - Madrid",
+          "from": "EZE",
+          "to": "MAD",
+          "start": "2026-11-01T15:05",
+          "end": "2026-11-01T07:20",
+          "provider": "Aerolíneas Argentinas",
+          "confirmation": "618774355600",
+          "address": "",
+          "travelers": [],
+          "details": "Vuelo ida y vuelta para 2 adultos con Aerolíneas Argentinas, directo, sin equipaje para despachar incluido. El regreso es el 17 de noviembre desde MAD (19:05) a EZE (04:10); el total pagado fue de US$2.482,00 con tarjeta Visa Banco Galicia.",
+          "attachments": [
+            {
+              "name": "voucher_flight_D-202608182323-2635bf8c-c13e-4bf5-9601-4639f9edcbd9.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/618774355600/1788962345653-voucher_flight_D-202608182323-2635bf8c-c13e-4bf5-9601-4639f9edcbd9.pdf"
+            }
+          ]
         }
       ]
     }
