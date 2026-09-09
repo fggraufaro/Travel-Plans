@@ -473,15 +473,15 @@
     var dayInfo = dayLabels(visibleItems);
     var todayStr = ymd(new Date());
     var days = [];
-    for (var i = 0; i < 14; i++) {
+    for (var i = 0; i < 7; i++) {
       var d = new Date(calendarStart); d.setDate(d.getDate() + i);
       days.push(d);
     }
 
     var html = '<div class="cal-nav">' +
-      '<button type="button" class="cal-nav-btn prev" onclick="shiftCalendar(-14)" aria-label="Dos semanas antes">' + ICONS.chevron + '</button>' +
-      '<span class="cal-range">' + fmtCalendarRange(days[0], days[13]) + '</span>' +
-      '<button type="button" class="cal-nav-btn next" onclick="shiftCalendar(14)" aria-label="Dos semanas después">' + ICONS.chevron + '</button>' +
+      '<button type="button" class="cal-nav-btn prev" onclick="shiftCalendar(-7)" aria-label="Semana anterior">' + ICONS.chevron + '</button>' +
+      '<span class="cal-range">' + fmtCalendarRange(days[0], days[6]) + '</span>' +
+      '<button type="button" class="cal-nav-btn next" onclick="shiftCalendar(7)" aria-label="Semana siguiente">' + ICONS.chevron + '</button>' +
     '</div>';
 
     html += '<div class="cal-agenda">';
