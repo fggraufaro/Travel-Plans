@@ -88,6 +88,7 @@
   .item-icon.car{ color:var(--accent-strong); }
   .item-icon.train{ color:var(--sky); }
   .item-icon.activity{ color:var(--coral); }
+  .item-icon.location{ color:var(--ink-soft); }
   .item-icon.note{ color:var(--ink-soft); }
   .item-main{ flex:1; min-width:0; }
   .item-time{ font-family:"IBM Plex Mono"; font-size:.95rem; font-weight:500; color:var(--ink-soft); }
@@ -156,16 +157,22 @@
   .cal-row.today .cal-row-num{ color:var(--coral); }
   .cal-row-body{ flex:1; display:flex; flex-direction:column; gap:5px; min-width:0; padding-top:2px; }
   .cal-row-empty{ font-size:.85rem; color:var(--ink-faint); }
-  .cal-label{ font-size:.85rem; padding:4px 9px; border-radius:7px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; background:color-mix(in srgb, var(--ink-faint) 14%, transparent); color:var(--ink-soft); }
+  .cal-label{ display:flex; align-items:center; gap:4px; font-size:.85rem; padding:4px 9px; border-radius:7px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; background:color-mix(in srgb, var(--ink-faint) 14%, transparent); color:var(--ink-soft); }
+  .cal-label span{ overflow:hidden; text-overflow:ellipsis; }
   .cal-label.flight, .cal-label.activity{ background:color-mix(in srgb, var(--coral) 16%, transparent); color:var(--coral); }
   .cal-label.train{ background:color-mix(in srgb, var(--sky) 18%, transparent); color:var(--sky); }
   .cal-label.car{ background:color-mix(in srgb, var(--accent-strong) 20%, transparent); color:var(--accent-strong); }
   .cal-label.hotel{ background:color-mix(in srgb, var(--teal) 16%, transparent); color:var(--teal); }
+  .cal-label.location{ background:transparent; border:1px dashed var(--line-strong); color:var(--ink-soft); font-weight:600; }
+  .cal-label.location svg{ width:12px; height:12px; flex:none; }
   .cal-expand{ padding:2px 0 6px; }
   .cal-empty-note{ color:var(--ink-faint); font-size:.92rem; padding:10px 0 4px; }
   .quick-add-btn{ display:flex; align-items:center; justify-content:center; gap:7px; width:100%; margin-top:10px; padding:12px; border:1.5px dashed var(--line-strong); border-radius:14px; background:transparent; color:var(--ink-soft); font-family:"IBM Plex Sans"; font-size:.9rem; font-weight:500; cursor:pointer; }
   .quick-add-btn svg{ width:16px; height:16px; }
   .quick-add{ margin-top:10px; padding:14px; border:1px solid var(--line); border-radius:14px; background:var(--surface); }
+  .quickadd-type{ display:flex; gap:8px; margin-bottom:14px; }
+  .quickadd-type button{ flex:1; font-family:"IBM Plex Sans"; font-weight:500; font-size:.88rem; padding:9px; border-radius:9px; border:1px solid var(--line-strong); background:var(--surface-2); color:var(--ink-soft); cursor:pointer; }
+  .quickadd-type button[aria-pressed="true"]{ background:var(--ink); border-color:var(--ink); color:var(--bg); }
 
   .fab{ position:fixed; right:20px; bottom:24px; width:56px; height:56px; border-radius:50%; background:var(--coral); color:#fff; border:none; box-shadow:0 8px 20px -6px rgb(0 0 0 / .4); display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:20; }
   .fab svg{ width:24px; height:24px; }
@@ -232,10 +239,10 @@
     trash:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M9.5 7V4.6a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1V7"/><path d="M6.5 7l.9 12.4a1.6 1.6 0 0 0 1.6 1.5h6a1.6 1.6 0 0 0 1.6-1.5L17.5 7"/></svg>',
     pin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.4-7-11.5A7 7 0 0 1 19 9.5C19 14.6 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>'
   };
-  var TYPE_ICON = { flight:'plane', hotel:'bed', car:'car', train:'train', activity:'star', note:'flag' };
-  var TYPE_LABEL = { flight:'Vuelo', hotel:'Alojamiento', car:'Auto', train:'Tren', activity:'Actividad', note:'Nota' };
-  var TYPE_LABEL_PLURAL = { flight:'Vuelos', hotel:'Alojamiento', car:'Autos', train:'Trenes', activity:'Actividades', note:'Notas' };
-  var TYPE_ORDER = ['flight', 'train', 'hotel', 'car', 'activity', 'note'];
+  var TYPE_ICON = { flight:'plane', hotel:'bed', car:'car', train:'train', activity:'star', location:'pin', note:'flag' };
+  var TYPE_LABEL = { flight:'Vuelo', hotel:'Alojamiento', car:'Auto', train:'Tren', activity:'Actividad', location:'Ubicación', note:'Nota' };
+  var TYPE_LABEL_PLURAL = { flight:'Vuelos', hotel:'Alojamiento', car:'Autos', train:'Trenes', activity:'Actividades', location:'Ubicaciones', note:'Notas' };
+  var TYPE_ORDER = ['flight', 'train', 'hotel', 'car', 'activity', 'location', 'note'];
 
   function mapsUrl(address){
     return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(address);
@@ -401,7 +408,7 @@
         renderTravelers(item)
       );
     }
-    var time = fmtTime(item.start);
+    var time = item.type === 'location' ? '' : fmtTime(item.start);
     var endBadge = '';
     if (item.end && item.end.slice(0,10) !== item.start.slice(0,10)) {
       endBadge = ' <span class="item-time">→ ' + fmtDateShort(item.end) + (fmtTime(item.end) ? ' ' + fmtTime(item.end) : '') + '</span>';
@@ -456,6 +463,11 @@
           if (first) { d.labels.push({ type: 'hotel', text: item.title }); first = false; }
           cursor.setDate(cursor.getDate() + 1);
         }
+      } else if (item.type === 'location') {
+        var locKey = (item.start || '').slice(0, 10);
+        if (!locKey) return;
+        // A "where we are" marker, not a timed event — always shows first in the day.
+        ensure(locKey).labels.unshift({ type: 'location', text: item.title });
       } else {
         var key2 = (item.start || '').slice(0, 10);
         if (!key2) return;
@@ -494,7 +506,7 @@
       var cls = 'cal-row' + (inRange ? '' : ' out') + (key === todayStr ? ' today' : '') +
         (info.staying ? ' staying' : '') + (isSelected ? ' selected' : '');
       var bodyHtml = info.labels.length
-        ? info.labels.map(function(l){ return '<div class="cal-label ' + l.type + '">' + esc(l.text) + '</div>'; }).join('')
+        ? info.labels.map(function(l){ return '<div class="cal-label ' + l.type + '">' + (l.type === 'location' ? ICONS.pin : '') + '<span>' + esc(l.text) + '</span></div>'; }).join('')
         : '<div class="cal-row-empty">Sin planes</div>';
       html += '<button type="button" class="' + cls + '" onclick="selectDay(\'' + key + '\')">' +
         '<div class="cal-row-date"><span class="cal-row-wd">' + esc(wd.charAt(0).toUpperCase() + wd.slice(1)) + '</span><span class="cal-row-num">' + d.getDate() + '</span></div>' +
@@ -512,24 +524,31 @@
     return html;
   }
 
-  // ---------------- quick-add activity (from calendar) ----------------
+  // ---------------- quick-add activity / location (from calendar) ----------------
   var quickAddOpen = false;
+  var quickAddType = 'activity';
   var quickAddTitle = '';
   var quickAddTime = '';
   var quickAddSubmitting = false;
   var quickAddError = '';
 
-  function openQuickAdd(){ quickAddOpen = true; quickAddTitle = ''; quickAddTime = ''; quickAddError = ''; render(); }
+  function openQuickAdd(){ quickAddOpen = true; quickAddType = 'activity'; quickAddTitle = ''; quickAddTime = ''; quickAddError = ''; render(); }
   function closeQuickAdd(){ quickAddOpen = false; render(); }
+  function setQuickAddType(t){ quickAddType = t; render(); }
 
   function renderQuickAdd(){
     if (!quickAddOpen) {
-      return '<button type="button" class="quick-add-btn" onclick="openQuickAdd()">' + ICONS.plus + '<span>Agregar actividad</span></button>';
+      return '<button type="button" class="quick-add-btn" onclick="openQuickAdd()">' + ICONS.plus + '<span>Agregar actividad o ubicación</span></button>';
     }
+    var isLoc = quickAddType === 'location';
     return (
       '<div class="quick-add">' +
-      '<div class="field"><label>Actividad</label><input type="text" id="quick-add-title" oninput="quickAddTitle=this.value" placeholder="Ej: Museo del Louvre" value="' + esc(quickAddTitle) + '"></div>' +
-      '<div class="field"><label>Hora (opcional)</label><input type="time" id="quick-add-time" oninput="quickAddTime=this.value" value="' + esc(quickAddTime) + '"></div>' +
+      '<div class="quickadd-type">' +
+        '<button type="button" aria-pressed="' + !isLoc + '" onclick="setQuickAddType(\'activity\')">Actividad</button>' +
+        '<button type="button" aria-pressed="' + isLoc + '" onclick="setQuickAddType(\'location\')">Ubicación</button>' +
+      '</div>' +
+      '<div class="field"><label>' + (isLoc ? 'Ciudad o lugar' : 'Actividad') + '</label><input type="text" id="quick-add-title" oninput="quickAddTitle=this.value" placeholder="' + (isLoc ? 'Ej: Londres' : 'Ej: Museo del Louvre') + '" value="' + esc(quickAddTitle) + '"></div>' +
+      (isLoc ? '' : '<div class="field"><label>Hora (opcional)</label><input type="time" id="quick-add-time" oninput="quickAddTime=this.value" value="' + esc(quickAddTime) + '"></div>') +
       '<div class="sheet-actions"><button type="button" class="btn" onclick="closeQuickAdd()">Cancelar</button>' +
       '<button type="button" class="btn primary" onclick="submitQuickAdd()" ' + (quickAddSubmitting ? 'disabled' : '') + '>' + (quickAddSubmitting ? '<span class="spinner"></span>' : 'Guardar') + '</button></div>' +
       (quickAddError ? '<div class="parse-error">' + esc(quickAddError) + '</div>' : '') +
@@ -539,7 +558,8 @@
 
   async function submitQuickAdd(){
     var title = (quickAddTitle || '').trim();
-    if (!title) { quickAddError = 'Ponele un nombre a la actividad.'; render(); return; }
+    var isLoc = quickAddType === 'location';
+    if (!title) { quickAddError = isLoc ? 'Ponele un nombre al lugar.' : 'Ponele un nombre a la actividad.'; render(); return; }
     if (!selectedDay) { quickAddError = 'Elegí un día primero.'; render(); return; }
     quickAddSubmitting = true; quickAddError = ''; render();
     try {
@@ -549,7 +569,7 @@
         body: JSON.stringify({
           action: 'add_item',
           tripId: activeTripId,
-          item: { type: 'activity', title: title, start: selectedDay + 'T' + (quickAddTime || '00:00') }
+          item: { type: quickAddType, title: title, start: selectedDay + 'T' + (isLoc ? '00:00' : (quickAddTime || '00:00')) }
         })
       });
       var data = await res.json();
