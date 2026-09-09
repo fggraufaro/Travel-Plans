@@ -543,21 +543,6 @@
           "travelers": [],
           "details": "",
           "attachments": []
-        },
-        {
-          "id": "i_f23dd41d1e",
-          "type": "activity",
-          "title": "Cheltenham",
-          "from": "",
-          "to": "",
-          "start": "2026-11-05T00:00",
-          "end": "",
-          "provider": "",
-          "confirmation": "",
-          "address": "",
-          "travelers": [],
-          "details": "",
-          "attachments": []
         }
       ]
     }
