@@ -423,6 +423,21 @@
           "travelers": [],
           "details": "",
           "attachments": []
+        },
+        {
+          "id": "i_a91355984b",
+          "type": "activity",
+          "title": "London",
+          "from": "",
+          "to": "",
+          "start": "2026-11-03T00:00",
+          "end": "",
+          "provider": "",
+          "confirmation": "",
+          "address": "",
+          "travelers": [],
+          "details": "",
+          "attachments": []
         }
       ]
     }
