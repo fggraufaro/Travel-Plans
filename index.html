@@ -588,7 +588,6 @@
       }
       quickAddOpen = false;
       render();
-      setTimeout(function(){ loadTrips(); }, 15000);
     } catch (e) {
       quickAddSubmitting = false;
       quickAddError = 'No se pudo conectar con el servidor. Probá de nuevo.';
@@ -841,7 +840,6 @@
         activeTypeFilters = [];
       }
       render();
-      setTimeout(function(){ loadTrips(); }, 15000);
     } catch (e) {
       newTripSubmitting = false;
       newTripError = 'No se pudo conectar con el servidor. Probá de nuevo.';
@@ -1054,11 +1052,25 @@
       if (added.length) parts.push((added.length === 1 ? 'Reserva agregada: ' : added.length + ' reservas agregadas: ') + added.map(titleOf).join(', '));
       if (merged.length) parts.push((merged.length === 1 ? 'Reserva actualizada con datos nuevos: ' : merged.length + ' reservas actualizadas con datos nuevos: ') + merged.map(titleOf).join(', '));
       if (!parts.length) parts.push(results.length ? 'Ya estaba agregada, sin datos nuevos en este email.' : 'No se encontró ninguna reserva en ese texto.');
-      addSuccess = parts.join(' — ') + ((added.length || merged.length) ? '. La página se actualiza en un minuto.' : '');
+      addSuccess = parts.join(' — ');
+
+      var targetTrip = TRIPS.find(function(t){ return t.id === (data.tripId || activeTripId); });
+      if (targetTrip) {
+        targetTrip.items = targetTrip.items || [];
+        results.forEach(function(r){
+          if (!r.booking) return;
+          if (r.status === 'added') {
+            targetTrip.items.push(r.booking);
+          } else if (r.status === 'merged') {
+            var idx = targetTrip.items.findIndex(function(it){ return it.id === r.booking.id; });
+            if (idx !== -1) targetTrip.items[idx] = r.booking; else targetTrip.items.push(r.booking);
+          }
+        });
+      }
+
       addPasteText = '';
       addAttachments = [];
       render();
-      setTimeout(function(){ loadTrips(); }, 15000);
     } catch (e) {
       addSubmitting = false;
       addError = 'No se pudo conectar con el servidor. Probá de nuevo.';
