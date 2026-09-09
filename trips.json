@@ -438,6 +438,21 @@
           "travelers": [],
           "details": "",
           "attachments": []
+        },
+        {
+          "id": "i_aa34b9f4d2",
+          "type": "location",
+          "title": "Buenos Aires / Madrid",
+          "from": "",
+          "to": "",
+          "start": "2026-11-01T00:00",
+          "end": "",
+          "provider": "",
+          "confirmation": "",
+          "address": "",
+          "travelers": [],
+          "details": "",
+          "attachments": []
         }
       ]
     }
