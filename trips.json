@@ -350,7 +350,25 @@
       "title": "UK & Portugal",
       "startDate": "2026-11-01",
       "endDate": "2026-11-17",
-      "items": []
+      "items": [
+        {
+          "id": "i_7f50a52745",
+          "type": "flight",
+          "title": "easyJet booking KDBP9GX",
+          "from": "",
+          "to": "",
+          "start": "2026-09-09T00:00",
+          "end": "",
+          "provider": "easyJet",
+          "confirmation": "KDBP9GX",
+          "address": "",
+          "travelers": [
+            "FRANCISCO GONZALEZ GRAU"
+          ],
+          "details": "El correo de confirmación de easyJet no incluye los detalles completos del vuelo (ruta, fechas u horarios) en el texto proporcionado, solo el número de referencia de la reserva.",
+          "attachments": []
+        }
+      ]
     }
   ]
 }
