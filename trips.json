@@ -535,6 +535,42 @@
           ],
           "details": "Vuelo solo con equipaje de cabina; asientos asignados automáticamente. Pago de £145.95 con tarjeta de débito Visa realizado el 09/09/2026.",
           "attachments": []
+        },
+        {
+          "id": "i_ecc409fcbe",
+          "type": "train",
+          "title": "Cheltenham Spa to Birmingham International",
+          "from": "Cheltenham Spa",
+          "to": "Birmingham International",
+          "start": "2026-11-13T12:55",
+          "end": "2026-11-13T14:12",
+          "provider": "CrossCountry",
+          "confirmation": "1134747842584915",
+          "address": "",
+          "travelers": [],
+          "details": "Viaje con 2 cambios (en University Birmingham y Birmingham New Street), asientos en Coche C, plazas 33 y 37 en el último tramo. Billetes no reembolsables en el primer tramo y reembolsables en los siguientes; precio total con descuento por billete dividido: £29.20.",
+          "attachments": [
+            {
+              "name": "E-receipt.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747842584915/1788983621596-E-receipt.pdf"
+            },
+            {
+              "name": "passenger_Cheltenham Spa_to_University (Birmingham)_13_Nov_1255.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747842584915/1788983622170-passenger_Cheltenham_Spa_to_University__Birmingham__13_Nov_1255.pdf"
+            },
+            {
+              "name": "passenger_Cheltenham Spa_to_University (Birmingham)_13_Nov_1255_1.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747842584915/1788983622305-passenger_Cheltenham_Spa_to_University__Birmingham__13_Nov_1255_1.pdf"
+            },
+            {
+              "name": "passenger_University (Birmingham)_to_Birmingham International_13_Nov_1339.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747842584915/1788983622492-passenger_University__Birmingham__to_Birmingham_International_13_Nov_1339.pdf"
+            },
+            {
+              "name": "passenger_University (Birmingham)_to_Birmingham International_13_Nov_1339_1.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747842584915/1788983622645-passenger_University__Birmingham__to_Birmingham_International_13_Nov_1339_1.pdf"
+            }
+          ]
         }
       ]
     }
