@@ -558,21 +558,6 @@
           "travelers": [],
           "details": "",
           "attachments": []
-        },
-        {
-          "id": "i_57988a9e85",
-          "type": "location",
-          "title": "Cheltenham",
-          "from": "",
-          "to": "",
-          "start": "2026-11-05T00:00",
-          "end": "",
-          "provider": "",
-          "confirmation": "",
-          "address": "",
-          "travelers": [],
-          "details": "",
-          "attachments": []
         }
       ]
     }
