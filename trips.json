@@ -498,6 +498,24 @@
           "travelers": [],
           "details": "",
           "attachments": []
+        },
+        {
+          "id": "i_6e4f384b9a",
+          "type": "flight",
+          "title": "EJU7639",
+          "from": "Lisbon (T1)",
+          "to": "Madrid (T1)",
+          "start": "2026-11-16T07:05",
+          "end": "2026-11-16T09:25",
+          "provider": "easyJet",
+          "confirmation": "KDBS692",
+          "address": "",
+          "travelers": [
+            "GUSTAVO GONZALEZ",
+            "MARIANA GRAU"
+          ],
+          "details": "Vuelo solo con equipaje de cabina, asientos asignados automáticamente. Pago de 114.96€ realizado con Visa débito; el check-in online abre 30 días antes del vuelo.",
+          "attachments": []
         }
       ]
     }
