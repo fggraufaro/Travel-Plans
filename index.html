@@ -1023,13 +1023,15 @@
         render();
         return;
       }
-      if (data.merged) {
-        addSuccess = 'Reserva actualizada: ' + (data.booking && data.booking.title ? data.booking.title : '') + ' (ya existía, se sumaron los datos nuevos de este email — por ej. el check-in). La página se actualiza en un minuto.';
-      } else if (data.duplicate) {
-        addSuccess = 'Esta reserva ya estaba agregada, sin datos nuevos en este email.';
-      } else {
-        addSuccess = 'Reserva agregada: ' + (data.booking && data.booking.title ? data.booking.title : '') + '. La página se actualiza en un minuto.';
-      }
+      var results = Array.isArray(data.results) ? data.results : [];
+      var added = results.filter(function(r){ return r.status === 'added'; });
+      var merged = results.filter(function(r){ return r.status === 'merged'; });
+      var titleOf = function(r){ return (r.booking && r.booking.title) || 'sin título'; };
+      var parts = [];
+      if (added.length) parts.push((added.length === 1 ? 'Reserva agregada: ' : added.length + ' reservas agregadas: ') + added.map(titleOf).join(', '));
+      if (merged.length) parts.push((merged.length === 1 ? 'Reserva actualizada con datos nuevos: ' : merged.length + ' reservas actualizadas con datos nuevos: ') + merged.map(titleOf).join(', '));
+      if (!parts.length) parts.push(results.length ? 'Ya estaba agregada, sin datos nuevos en este email.' : 'No se encontró ninguna reserva en ese texto.');
+      addSuccess = parts.join(' — ') + ((added.length || merged.length) ? '. La página se actualiza en un minuto.' : '');
       addPasteText = '';
       addAttachments = [];
       render();
