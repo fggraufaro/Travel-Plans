@@ -342,6 +342,42 @@
           "travelers": [],
           "details": "Alojamiento entero para 4 adultos con precio total de £969.01 (incluye impuestos). Cancelación gratuita durante 24 horas, con reembolso parcial si se cancela antes de las 16:00 del 26 de septiembre.",
           "attachments": []
+        },
+        {
+          "id": "i_61a2e2fe77",
+          "type": "flight",
+          "title": "AF 471",
+          "from": "EZE",
+          "to": "CDG",
+          "start": "2026-09-11T23:55",
+          "end": "2026-09-12T17:50",
+          "provider": "AirFrance",
+          "confirmation": "YG9IV6",
+          "address": "",
+          "travelers": [
+            "PABLO JAVIER GUARDATI",
+            "VIVIANA CRISTINA ZIMMERMANN"
+          ],
+          "details": "Vuelo directo en clase económica de Buenos Aires a París, sin escalas, con equipaje facturado incluido y asiento 1 PC asignado.",
+          "attachments": []
+        },
+        {
+          "id": "i_c269991c6d",
+          "type": "flight",
+          "title": "AF 468",
+          "from": "CDG",
+          "to": "EZE",
+          "start": "2026-10-14T13:25",
+          "end": "2026-10-14T21:50",
+          "provider": "AirFrance",
+          "confirmation": "YG9IV6",
+          "address": "",
+          "travelers": [
+            "PABLO JAVIER GUARDATI",
+            "VIVIANA CRISTINA ZIMMERMANN"
+          ],
+          "details": "Vuelo directo en clase económica de regreso de París a Buenos Aires, sin escalas, con asiento 1 PC asignado.",
+          "attachments": []
         }
       ]
     },
