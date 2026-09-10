@@ -571,21 +571,6 @@
               "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134747842584915/1788983622645-passenger_University__Birmingham__to_Birmingham_International_13_Nov_1339_1.pdf"
             }
           ]
-        },
-        {
-          "id": "i_cc7a9c95ae",
-          "type": "activity",
-          "title": "Birmingham / Lisboa",
-          "from": "",
-          "to": "",
-          "start": "2026-11-13T00:00",
-          "end": "",
-          "provider": "",
-          "confirmation": "",
-          "address": "",
-          "travelers": [],
-          "details": "",
-          "attachments": []
         }
       ]
     }
