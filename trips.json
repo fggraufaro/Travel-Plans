@@ -378,6 +378,21 @@
           ],
           "details": "Vuelo directo en clase económica de regreso de París a Buenos Aires, sin escalas, con asiento 1 PC asignado.",
           "attachments": []
+        },
+        {
+          "id": "i_e7425f5e4f",
+          "type": "hotel",
+          "title": "Loft d'architecte avec piscine privée Ste Victoire",
+          "from": "",
+          "to": "",
+          "start": "2026-10-07T16:00",
+          "end": "2026-10-11T10:00",
+          "provider": "Airbnb",
+          "confirmation": "HMJ8WAA4P2",
+          "address": "3505 Rte de Vauvenargues, 13100 Saint-Marc-Jaumegarde, France",
+          "travelers": [],
+          "details": "Alojamiento entero para 4 adultos con anfitrión Acap Host; cancelación gratuita 24 horas y parcial si se cancela antes del 30 de septiembre a las 16:00. Precio total pagado: 788,86 GBP.",
+          "attachments": []
         }
       ]
     },
