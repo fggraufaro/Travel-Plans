@@ -661,6 +661,21 @@
           "travelers": [],
           "details": "",
           "attachments": []
+        },
+        {
+          "id": "i_baefd302be",
+          "type": "location",
+          "title": "Lake District",
+          "from": "",
+          "to": "",
+          "start": "2026-11-07T00:00",
+          "end": "",
+          "provider": "",
+          "confirmation": "",
+          "address": "",
+          "travelers": [],
+          "details": "",
+          "attachments": []
         }
       ]
     }
