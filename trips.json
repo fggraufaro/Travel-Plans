@@ -616,6 +616,21 @@
           "travelers": [],
           "details": "",
           "attachments": []
+        },
+        {
+          "id": "i_d675ec8c5c",
+          "type": "location",
+          "title": "Lisboa / Madrid",
+          "from": "",
+          "to": "",
+          "start": "2026-11-16T00:00",
+          "end": "",
+          "provider": "",
+          "confirmation": "",
+          "address": "",
+          "travelers": [],
+          "details": "",
+          "attachments": []
         }
       ]
     }
