@@ -631,6 +631,21 @@
           "travelers": [],
           "details": "",
           "attachments": []
+        },
+        {
+          "id": "i_291b663d76",
+          "type": "location",
+          "title": "Madrid",
+          "from": "",
+          "to": "",
+          "start": "2026-11-17T00:00",
+          "end": "",
+          "provider": "",
+          "confirmation": "",
+          "address": "",
+          "travelers": [],
+          "details": "",
+          "attachments": []
         }
       ]
     }
