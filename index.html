@@ -395,9 +395,15 @@
   function renderMain(item){
     var isRoute = item.type === 'flight' || item.type === 'train' || item.type === 'car';
     if (isRoute) {
+      // Same-day trips (the common case for flights/trains) just need the time — the day
+      // heading above already gives the date. A multi-day rental or overnight leg needs the
+      // date spelled out on both ends, same as hotels, or it reads as landing hours later.
+      var sameDay = item.start && item.end && item.start.slice(0, 10) === item.end.slice(0, 10);
+      var startLabel = (sameDay || !item.end) ? fmtTime(item.start) : fmtDateTime(item.start);
+      var endLabel = (sameDay || !item.end) ? fmtTime(item.end) : fmtDateTime(item.end);
       return (
-        '<div class="item-route"><span class="t">' + fmtTime(item.start) + '</span> ' + linkPlace(item.from) +
-        '<span class="arrow">→</span><span class="t">' + fmtTime(item.end) + '</span> ' + linkPlace(item.to) + '</div>' +
+        '<div class="item-route"><span class="t">' + startLabel + '</span> ' + linkPlace(item.from) +
+        '<span class="arrow">→</span><span class="t">' + endLabel + '</span> ' + linkPlace(item.to) + '</div>' +
         '<div class="item-sub">' + esc(item.title) + '</div>' +
         renderTravelers(item)
       );
