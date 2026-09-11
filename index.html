@@ -76,7 +76,12 @@
   .hero .countdown span{ font-size:.68rem; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.04em; }
 
   .day{ margin-bottom:26px; }
-  .day h2{ font-family:"Fraunces", Georgia, serif; font-weight:600; font-size:1.25rem; color:var(--ink); margin-bottom:12px; padding-left:2px; }
+  .day-head{ display:flex; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px; }
+  .day-head h2{ font-family:"Fraunces", Georgia, serif; font-weight:600; font-size:1.25rem; color:var(--ink); padding-left:2px; }
+  .day-loc{ display:inline-flex; align-items:center; gap:5px; font-size:.82rem; font-weight:600; padding:4px 4px 4px 10px; border:1px dashed var(--line-strong); border-radius:999px; color:var(--ink-soft); }
+  .day-loc svg{ width:12px; height:12px; flex:none; color:var(--ink-faint); }
+  .day-loc .icon-btn{ width:24px; height:24px; }
+  .day-loc .icon-btn svg{ width:13px; height:13px; color:inherit; }
   .items{ display:flex; flex-direction:column; gap:12px; }
 
   .item{ position:relative; background:var(--surface); border:1px solid var(--line); border-radius:16px; }
@@ -351,6 +356,19 @@
       byDate[d].items.push(item);
     });
     return groups;
+  }
+
+  function renderDayGroup(g){
+    var locItems = g.items.filter(function(it){ return it.type === 'location'; });
+    var regularItems = g.items.filter(function(it){ return it.type !== 'location'; });
+    var locHtml = locItems.map(function(it){
+      return '<span class="day-loc">' + ICONS.pin + '<span>' + esc(it.title) + '</span>' +
+        (it.id ? '<button type="button" class="icon-btn" onclick="deleteBooking(\'' + esc(it.id) + '\')" aria-label="Eliminar">' + ICONS.trash + '</button>' : '') +
+      '</span>';
+    }).join('');
+    return '<div class="day"><div class="day-head"><h2>' + fmtDateHeading(g.date) + '</h2>' + locHtml + '</div>' +
+      (regularItems.length ? '<div class="items">' + regularItems.map(renderItem).join('') + '</div>' : '') +
+    '</div>';
   }
 
   function fmtDateTime(dt){
@@ -741,10 +759,7 @@
         if (!upcomingItems.length) {
           html += '<div class="filter-empty-note">No quedan próximas reservas' + (pastItems.length ? ' — mirá las pasadas abajo' : '') + '.</div>';
         } else {
-          groupByDay(upcomingItems).forEach(function(g){
-            html += '<div class="day"><h2>' + fmtDateHeading(g.date) + '</h2><div class="items">' +
-              g.items.map(renderItem).join('') + '</div></div>';
-          });
+          groupByDay(upcomingItems).forEach(function(g){ html += renderDayGroup(g); });
         }
         if (pastItems.length) {
           html += '<button type="button" class="past-toggle-btn" aria-pressed="' + showPastItems + '" onclick="togglePastItems()">' +
@@ -752,10 +767,7 @@
             '<span class="chevron' + (showPastItems ? ' open' : '') + '">' + ICONS.chevron + '</span></button>';
           if (showPastItems) {
             html += '<div class="past-section">';
-            groupByDay(pastItems).forEach(function(g){
-              html += '<div class="day"><h2>' + fmtDateHeading(g.date) + '</h2><div class="items">' +
-                g.items.map(renderItem).join('') + '</div></div>';
-            });
+            groupByDay(pastItems).forEach(function(g){ html += renderDayGroup(g); });
             html += '</div>';
           }
         }
