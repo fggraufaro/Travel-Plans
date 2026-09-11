@@ -356,10 +356,21 @@
           "address": "",
           "travelers": [
             "PABLO JAVIER GUARDATI",
-            "VIVIANA CRISTINA ZIMMERMANN"
+            "VIVIANA CRISTINA ZIMMERMANN",
+            "Pablo Javier Guardati",
+            "Viviana Cristina Zimmermann"
           ],
-          "details": "Vuelo directo en clase económica de Buenos Aires a París, sin escalas, con equipaje facturado incluido y asiento 1 PC asignado.",
-          "attachments": []
+          "details": "Vuelo AF0471 con check-in confirmado; se debe presentar la tarjeta de embarque electrónica en el aeropuerto.",
+          "attachments": [
+            {
+              "name": "Boarding-documents.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/YG9IV6/1789113513326-Boarding-documents.pdf"
+            },
+            {
+              "name": "Mobile-boarding-pass-AF0471-11 Sep.png",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/YG9IV6/1789113513798-Mobile-boarding-pass-AF0471-11_Sep.png"
+            }
+          ]
         },
         {
           "id": "i_c269991c6d",
