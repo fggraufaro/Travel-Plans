@@ -404,6 +404,21 @@
           "travelers": [],
           "details": "Alojamiento entero para 4 adultos con anfitrión Acap Host; cancelación gratuita 24 horas y parcial si se cancela antes del 30 de septiembre a las 16:00. Precio total pagado: 788,86 GBP.",
           "attachments": []
+        },
+        {
+          "id": "i_3d1cefe8b9",
+          "type": "hotel",
+          "title": "Sublim Apartment – Le Marais / Beaubourg",
+          "from": "",
+          "to": "",
+          "start": "2026-10-11T16:00",
+          "end": "2026-10-14T10:00",
+          "provider": "Airbnb",
+          "confirmation": "HMRN2TDNB9",
+          "address": "39 Rue des Gravilliers, 75003 Paris, France",
+          "travelers": [],
+          "details": "Alojamiento entero anfitrionado por Joffrey para 4 adultos, con check-in a partir de las 16:00 y salida antes de las 10:00. Precio total de £1,507.08; cancelación gratuita durante 24 horas, luego reembolso parcial si se cancela antes del 4 de octubre a las 16:00.",
+          "attachments": []
         }
       ]
     },
