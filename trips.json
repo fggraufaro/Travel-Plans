@@ -417,6 +417,23 @@
           "travelers": [],
           "details": "Alojamiento entero anfitrionado por Joffrey para 4 adultos, con check-in a partir de las 16:00 y salida antes de las 10:00. Precio total de £1,507.08; cancelación gratuita durante 24 horas, luego reembolso parcial si se cancela antes del 4 de octubre a las 16:00.",
           "attachments": []
+        },
+        {
+          "id": "i_837bbfca73",
+          "type": "car",
+          "title": "MG ZS Estate o similar",
+          "from": "Marseille Provence Airport",
+          "to": "Marseille Provence Airport",
+          "start": "2026-10-03T17:30",
+          "end": "2026-10-11T09:00",
+          "provider": "Europcar",
+          "confirmation": "735572996",
+          "address": "Aéroport Marseille-Provence, Marseille, France, 13700",
+          "travelers": [
+            "Paulina Guardati"
+          ],
+          "details": "Alquiler de coche automático con aire acondicionado, 5 plazas y 4 puertas, incluye seguro Zurich Full Insurance UK; precio total £337.44 (£270.52 alquiler + £66.92 seguro).",
+          "attachments": []
         }
       ]
     },
