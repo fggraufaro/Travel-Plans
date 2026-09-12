@@ -792,6 +792,21 @@
               "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/EUZULP97/1789209395180-Coach_Ticket_EUZULP97.pdf"
             }
           ]
+        },
+        {
+          "id": "i_01f1c5873a",
+          "type": "train",
+          "title": "NX 445",
+          "from": "LONDON Victoria Coach Station",
+          "to": "CHELTENHAM Royal Well Bus Stn",
+          "start": "2026-11-04T18:00",
+          "end": "2026-11-04T20:45",
+          "provider": "National Express",
+          "confirmation": "",
+          "address": "",
+          "travelers": [],
+          "details": "Viaje en autobús National Express NX 445 para 3 adultos, desde la estación de autocares de Victoria en Londres hasta Royal Well en Cheltenham.",
+          "attachments": []
         }
       ]
     }
