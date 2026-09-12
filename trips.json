@@ -807,21 +807,6 @@
           "travelers": [],
           "details": "Viaje en autobús National Express NX 445 para 3 adultos, desde la estación de autocares de Victoria en Londres hasta Royal Well en Cheltenham.",
           "attachments": []
-        },
-        {
-          "id": "i_6e707f299a",
-          "type": "hotel",
-          "title": "Luxury apartment near the British Museum",
-          "from": "",
-          "to": "",
-          "start": "2025-11-02T15:00",
-          "end": "2025-11-04T10:00",
-          "provider": "Airbnb",
-          "confirmation": "HMT5KSHJXP",
-          "address": "Jeff Wooller College, 25 Old Gloucester St, London WC1N 3AX, UK",
-          "travelers": [],
-          "details": "Alojamiento entero gestionado por el anfitrión Alber para 4 adultos, con un precio total de £465.00 (£232.50 x 2 noches). Cancelación gratuita antes de las 15:00 del 1 de noviembre, con reembolso parcial si se cancela después.",
-          "attachments": []
         }
       ]
     }
