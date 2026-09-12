@@ -772,6 +772,26 @@
           "travelers": [],
           "details": "",
           "attachments": []
+        },
+        {
+          "id": "i_c2aca89eef",
+          "type": "train",
+          "title": "National Express",
+          "from": "",
+          "to": "",
+          "start": "",
+          "end": "",
+          "provider": "National Express",
+          "confirmation": "EUZULP97",
+          "address": "",
+          "travelers": [],
+          "details": "Confirmación de viaje con National Express; los billetes electrónicos están adjuntos al correo, pero no se especifican fechas ni rutas.",
+          "attachments": [
+            {
+              "name": "Coach Ticket EUZULP97.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/EUZULP97/1789209395180-Coach_Ticket_EUZULP97.pdf"
+            }
+          ]
         }
       ]
     }
