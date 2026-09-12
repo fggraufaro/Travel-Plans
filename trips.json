@@ -787,6 +787,23 @@
           "travelers": [],
           "details": "Viaje en autobús National Express NX 445 para 3 adultos, desde la estación de autocares de Victoria en Londres hasta Royal Well en Cheltenham.",
           "attachments": []
+        },
+        {
+          "id": "i_362b51f2c0",
+          "type": "hotel",
+          "title": "easyHotel Lisbon",
+          "from": "",
+          "to": "",
+          "start": "2026-11-13T15:00",
+          "end": "2026-11-16T12:00",
+          "provider": "Booking.com",
+          "confirmation": "5770166464",
+          "address": "60A Rua de Santa Marta, Santo Antonio, Lisbon, 1150-006, Portugal",
+          "travelers": [
+            "Francisco Gonzalez Grau"
+          ],
+          "details": "Reserva de una habitación triple por 3 noches, precio total de 296€ (IVA y tasa turística incluidos). La tarifa es no reembolsable y no se pueden cambiar las fechas; cancelar o no presentarse implica el cargo total de la reserva.",
+          "attachments": []
         }
       ]
     }
