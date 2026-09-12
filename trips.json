@@ -819,6 +819,21 @@
           "travelers": [],
           "details": "Reserva de casa entera para 4 adultos por 4 noches, con un costo total de £408.00. Cancelación gratuita durante 24 horas, después no reembolsable.",
           "attachments": []
+        },
+        {
+          "id": "i_bda98a31fe",
+          "type": "hotel",
+          "title": "Luxury apartment near the British Museum",
+          "from": "",
+          "to": "",
+          "start": "2026-11-02T15:00",
+          "end": "2026-11-04T10:00",
+          "provider": "Airbnb",
+          "confirmation": "HMT5KSHJXP",
+          "address": "Jeff Wooller College, 25 Old Gloucester St, London WC1N 3AX, UK",
+          "travelers": [],
+          "details": "Alojamiento entero anfitrionado por Alber para 4 adultos, con un costo total de £465.00 (£232.50 por noche, 2 noches). Cancelación gratuita antes de las 15:00 del 1 de noviembre; después de esa hora aplica reembolso parcial.",
+          "attachments": []
         }
       ]
     }
