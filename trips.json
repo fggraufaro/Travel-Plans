@@ -834,6 +834,42 @@
           "travelers": [],
           "details": "Alojamiento entero anfitrionado por Alber para 4 adultos, con un costo total de £465.00 (£232.50 por noche, 2 noches). Cancelación gratuita antes de las 15:00 del 1 de noviembre; después de esa hora aplica reembolso parcial.",
           "attachments": []
+        },
+        {
+          "id": "i_2ba4cee970",
+          "type": "car",
+          "title": "Bus Cheltenham → Winchcombe (servicio 606 o W)",
+          "from": "Cheltenham",
+          "to": "Winchcombe",
+          "start": "",
+          "end": "",
+          "provider": "",
+          "confirmation": "",
+          "address": "",
+          "travelers": [
+            "Mariana",
+            "Gustavo"
+          ],
+          "details": "Trayecto en autobús desde Cheltenham hasta Winchcombe; se recomienda verificar los horarios actuales de las líneas 606 o W unos días antes del viaje.",
+          "attachments": []
+        },
+        {
+          "id": "i_7d3416413c",
+          "type": "activity",
+          "title": "Caminata circular Winchcombe – Cotswold Way – Belas Knap Long Barrow",
+          "from": "Winchcombe",
+          "to": "Winchcombe",
+          "start": "",
+          "end": "",
+          "provider": "",
+          "confirmation": "",
+          "address": "",
+          "travelers": [
+            "Mariana",
+            "Gustavo"
+          ],
+          "details": "Caminata circular de 8,5 km (5,25 millas) por el Cotswold Way hasta Belas Knap Long Barrow y regreso a Winchcombe, con una duración estimada de 3 a 4 horas y dificultad moderada por pendientes y stiles. Al regresar se puede visitar St Peter's Church, la plaza del mercado y disfrutar de té o pub en tiendas locales.",
+          "attachments": []
         }
       ]
     }
