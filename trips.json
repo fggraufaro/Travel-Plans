@@ -460,9 +460,11 @@
           "address": "",
           "travelers": [
             "Gustavo Gonzalez",
-            "Mariana Grau"
+            "Mariana Grau",
+            "Gustavo",
+            "Mariana"
           ],
-          "details": "Solo equipaje de cabina (un bolso pequeño bajo el asiento y uno grande en el compartimento superior por pasajero), asientos asignados automáticamente. Pago de €133,96 con débito Visa el 09/09/2026.",
+          "details": "Vuelo directo de easyJet entre Madrid y Londres Luton; no se incluyen más detalles de tarifa o equipaje en el texto.",
           "attachments": []
         },
         {
@@ -612,7 +614,7 @@
             "GUSTAVO",
             "MARIANA"
           ],
-          "details": "Vuelo operado por easyJet con confirmación KDBS692; incluye tarjetas de embarque adjuntas en el enlace proporcionado.",
+          "details": "Vuelo de easyJet solo con equipaje de cabina, pago de 114,96 € con tarjeta de débito Visa; asientos asignados automáticamente para ambos pasajeros.",
           "attachments": [
             {
               "name": "Boarding_Pass_KDBP9GX_7e5f5c6dd1.pdf",
