@@ -887,6 +887,23 @@
           ],
           "details": "Viaje de ida en autobús para 1 adulto; pasajero principal Francisco Grau.",
           "attachments": []
+        },
+        {
+          "id": "i_53546758df",
+          "type": "flight",
+          "title": "EZY6683",
+          "from": "Lisbon (LIS)",
+          "to": "Birmingham (BHX)",
+          "start": "2025-11-16T18:25",
+          "end": "2025-11-16T21:15",
+          "provider": "easyJet",
+          "confirmation": "XD***7443",
+          "address": "",
+          "travelers": [
+            "GONZALEZ GRAU, FRANCISCO MR"
+          ],
+          "details": "Vuelo con cierre de puerta a las 17:55 desde la Terminal 1, asiento asignado 23F (trasero). Incluye solo una bolsa pequeña bajo el asiento; no se incluyen equipaje de mano grande, maletas facturadas ni equipo deportivo.",
+          "attachments": []
         }
       ]
     }
