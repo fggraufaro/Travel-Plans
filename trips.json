@@ -1026,6 +1026,21 @@
               "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/KDBP9GX/1792593964244-Boarding_Pass_KDBP9GX_7e5f5c6dd1__1_.pdf"
             }
           ]
+        },
+        {
+          "id": "i_c800ddecb9",
+          "type": "location",
+          "title": "Cheltenham",
+          "from": "",
+          "to": "",
+          "start": "2026-11-11T00:00",
+          "end": "",
+          "provider": "",
+          "confirmation": "",
+          "address": "",
+          "travelers": [],
+          "details": "",
+          "attachments": []
         }
       ]
     }
