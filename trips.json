@@ -921,6 +921,23 @@
           ],
           "details": "Vuelo EZY6683 con asiento de asignación automática y una pieza de equipaje de mano pequeña incluida (máx. 45x36x20 cm); la facturación cierra 60 minutos antes de la salida.",
           "attachments": []
+        },
+        {
+          "id": "i_e6892c321d",
+          "type": "flight",
+          "title": "EZY6683",
+          "from": "Lisboa (T1)",
+          "to": "Birmingham",
+          "start": "2026-11-16T18:25",
+          "end": "2026-11-16T21:15",
+          "provider": "easyJet",
+          "confirmation": "KDL63LC",
+          "address": "",
+          "travelers": [
+            "FRANCISCO GONZALEZ GRAU"
+          ],
+          "details": "Vuelo solo con equipaje de mano (una pieza pequeña bajo el asiento), asiento de asignación automática. Pago de 57,49 € con tarjeta de débito MasterCard (Apple Pay); se puede cancelar sin coste en las primeras 24 horas tras la reserva, salvo comisión de cancelación.",
+          "attachments": []
         }
       ]
     }
