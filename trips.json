@@ -999,6 +999,29 @@
               "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134749059500417/1792591228825-passenger_Birmingham_New_Street_to_Cheltenham_Spa_16_Nov_2212.pdf"
             }
           ]
+        },
+        {
+          "id": "i_b6c860b07f",
+          "type": "flight",
+          "title": "EZY2306",
+          "from": "Madrid (T1)",
+          "to": "London Luton",
+          "start": "2025-11-02T10:35",
+          "end": "2025-11-02T12:00",
+          "provider": "easyJet",
+          "confirmation": "KDBP9GX",
+          "address": "",
+          "travelers": [
+            "Gustavo",
+            "Mariana"
+          ],
+          "details": "Vuelo directo de easyJet entre Madrid T1 y London Luton, con código de confirmación KDBP9GX.",
+          "attachments": [
+            {
+              "name": "Boarding_Pass_KDBP9GX_7e5f5c6dd1 (1).pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/KDBP9GX/1792593964244-Boarding_Pass_KDBP9GX_7e5f5c6dd1__1_.pdf"
+            }
+          ]
         }
       ]
     }
