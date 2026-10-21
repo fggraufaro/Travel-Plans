@@ -608,10 +608,17 @@
           "address": "",
           "travelers": [
             "GUSTAVO GONZALEZ",
-            "MARIANA GRAU"
+            "MARIANA GRAU",
+            "GUSTAVO",
+            "MARIANA"
           ],
-          "details": "Vuelo solo con equipaje de cabina (bolsa pequeña y maleta grande incluidas), asientos asignados automáticamente. Pago de €114.96 con tarjeta Visa débito; se puede cancelar sin penalización total dentro de las primeras 24 horas.",
-          "attachments": []
+          "details": "Vuelo operado por easyJet con confirmación KDBS692; incluye tarjetas de embarque adjuntas en el enlace proporcionado.",
+          "attachments": [
+            {
+              "name": "Boarding_Pass_KDBP9GX_7e5f5c6dd1.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/KDBS692/1792593738665-Boarding_Pass_KDBP9GX_7e5f5c6dd1.pdf"
+            }
+          ]
         },
         {
           "id": "i_811cca0a09",
