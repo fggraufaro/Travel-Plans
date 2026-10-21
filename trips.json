@@ -904,6 +904,23 @@
           ],
           "details": "Vuelo con cierre de puerta a las 17:55 desde la Terminal 1, asiento asignado 23F (trasero). Incluye solo una bolsa pequeña bajo el asiento; no se incluyen equipaje de mano grande, maletas facturadas ni equipo deportivo.",
           "attachments": []
+        },
+        {
+          "id": "i_2f6041e5bd",
+          "type": "flight",
+          "title": "EZY6683",
+          "from": "Lisboa (T1)",
+          "to": "Birmingham",
+          "start": "2026-11-16T18:25",
+          "end": "2026-11-16T21:15",
+          "provider": "easyJet",
+          "confirmation": "",
+          "address": "",
+          "travelers": [
+            "FRANCISCO GONZALEZ GRAU"
+          ],
+          "details": "Vuelo EZY6683 con asiento de asignación automática y una pieza de equipaje de mano pequeña incluida (máx. 45x36x20 cm); la facturación cierra 60 minutos antes de la salida.",
+          "attachments": []
         }
       ]
     }
