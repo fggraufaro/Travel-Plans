@@ -1041,6 +1041,21 @@
           "travelers": [],
           "details": "",
           "attachments": []
+        },
+        {
+          "id": "i_fc419d5263",
+          "type": "activity",
+          "title": "Viaje Lake District a Cheltenham",
+          "from": "",
+          "to": "",
+          "start": "2026-11-10T00:00",
+          "end": "",
+          "provider": "",
+          "confirmation": "",
+          "address": "",
+          "travelers": [],
+          "details": "",
+          "attachments": []
         }
       ]
     }
