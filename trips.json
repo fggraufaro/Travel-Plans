@@ -1071,6 +1071,21 @@
           "travelers": [],
           "details": "",
           "attachments": []
+        },
+        {
+          "id": "i_65baae301e",
+          "type": "activity",
+          "title": "Cena en cottage de Ashalaigh",
+          "from": "",
+          "to": "",
+          "start": "2026-11-11T18:00",
+          "end": "",
+          "provider": "",
+          "confirmation": "",
+          "address": "",
+          "travelers": [],
+          "details": "",
+          "attachments": []
         }
       ]
     }
