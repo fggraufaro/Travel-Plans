@@ -938,6 +938,62 @@
           ],
           "details": "Vuelo solo con equipaje de mano (una pieza pequeña bajo el asiento), asiento de asignación automática. Pago de 57,49 € con tarjeta de débito MasterCard (Apple Pay); se puede cancelar sin coste en las primeras 24 horas tras la reserva, salvo comisión de cancelación.",
           "attachments": []
+        },
+        {
+          "id": "i_aab29ec2a7",
+          "type": "train",
+          "title": "Train to Wolverhampton",
+          "from": "Birmingham International",
+          "to": "Birmingham New Street",
+          "start": "2026-11-16T21:46",
+          "end": "2026-11-16T21:56",
+          "provider": "Avanti West Coast",
+          "confirmation": "1134749059500417",
+          "address": "",
+          "travelers": [],
+          "details": "Billete Evening Day Single (Standard), reembolsable y cambiable, asiento Coche B 24. Precio total del viaje combinado: £15.60 (ahorro por billete dividido de £18.00).",
+          "attachments": [
+            {
+              "name": "E-receipt.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134749059500417/1792591228283-E-receipt.pdf"
+            },
+            {
+              "name": "passenger_Birmingham International_to_Birmingham New Street_16_Nov_2146.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134749059500417/1792591228648-passenger_Birmingham_International_to_Birmingham_New_Street_16_Nov_2146.pdf"
+            },
+            {
+              "name": "passenger_Birmingham New Street_to_Cheltenham Spa_16_Nov_2212.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134749059500417/1792591228825-passenger_Birmingham_New_Street_to_Cheltenham_Spa_16_Nov_2212.pdf"
+            }
+          ]
+        },
+        {
+          "id": "i_0c6c9fdbd5",
+          "type": "train",
+          "title": "Train to Bristol Temple Meads",
+          "from": "Birmingham New Street",
+          "to": "Cheltenham Spa",
+          "start": "2026-11-16T22:12",
+          "end": "2026-11-16T22:50",
+          "provider": "CrossCountry",
+          "confirmation": "1134749059500417",
+          "address": "",
+          "travelers": [],
+          "details": "Billete Advance Single (Standard), no reembolsable pero cambiable, asiento Coche C 33, válido solo en servicios CrossCountry y en el tren reservado.",
+          "attachments": [
+            {
+              "name": "E-receipt.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134749059500417/1792591228283-E-receipt.pdf"
+            },
+            {
+              "name": "passenger_Birmingham International_to_Birmingham New Street_16_Nov_2146.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134749059500417/1792591228648-passenger_Birmingham_International_to_Birmingham_New_Street_16_Nov_2146.pdf"
+            },
+            {
+              "name": "passenger_Birmingham New Street_to_Cheltenham Spa_16_Nov_2212.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/1134749059500417/1792591228825-passenger_Birmingham_New_Street_to_Cheltenham_Spa_16_Nov_2212.pdf"
+            }
+          ]
         }
       ]
     }
