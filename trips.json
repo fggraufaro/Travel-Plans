@@ -627,10 +627,18 @@
           "travelers": [
             "Mr FRANCISCOO GONZALEZ",
             "Ms MARIANA GRAU",
-            "Mr GUSTAVO GONZALEZ"
+            "Mr GUSTAVO GONZALEZ",
+            "FRANCISCOO GONZALEZ",
+            "MARIANA GRAU",
+            "GUSTAVO GONZALEZ"
           ],
-          "details": "Vuelo solo con equipaje de cabina; asientos asignados automáticamente. Pago de £145.95 con tarjeta de débito Visa realizado el 09/09/2026.",
-          "attachments": []
+          "details": "Vuelo solo con equipaje de cabina, asientos asignados automáticamente; pago de £145.95 con tarjeta de débito Visa. Incluye política de cancelación de 24 horas con reembolso menos una tarifa.",
+          "attachments": [
+            {
+              "name": "Boarding_Pass_KDBS95R_4aa7a94261.pdf",
+              "url": "https://kmbnchjyjoudthrinkcb.supabase.co/storage/v1/object/public/booking-attachments/KDBS95R/1792592131042-Boarding_Pass_KDBS95R_4aa7a94261.pdf"
+            }
+          ]
         },
         {
           "id": "i_ecc409fcbe",
