@@ -885,6 +885,23 @@
           "travelers": [],
           "details": "Alojamiento de casa/piso completo para 4 adultos, check-in a partir de las 16:00 y checkout antes de las 10:00.",
           "attachments": []
+        },
+        {
+          "id": "i_b36f5e8c02",
+          "type": "train",
+          "title": "National Express FPT180EX",
+          "from": "Cheltenham",
+          "to": "London Victoria Coach Station",
+          "start": "2026-11-02T09:00",
+          "end": "2026-11-02T11:50",
+          "provider": "National Express",
+          "confirmation": "FPT180EX",
+          "address": "",
+          "travelers": [
+            "Francisco Grau"
+          ],
+          "details": "Viaje de ida en autobús para 1 adulto; pasajero principal Francisco Grau.",
+          "attachments": []
         }
       ]
     }
